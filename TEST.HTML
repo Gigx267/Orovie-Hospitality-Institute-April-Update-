@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Freka Natural Honey | Official Product Information</title>
+  <!-- Google Fonts & simple CSS reset -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+  <!-- Font Awesome 6 (free icons) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(145deg, #fef7e0 0%, #fff4e4 100%);
+      font-family: 'Inter', sans-serif;
+      color: #2c2418;
+      padding: 1.5rem;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* main card container */
+    .product-card {
+      max-width: 720px;
+      width: 100%;
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: 2.5rem;
+      box-shadow: 0 25px 45px -12px rgba(0,0,0,0.25), 0 8px 18px rgba(0,0,0,0.05);
+      overflow: hidden;
+      transition: all 0.2s ease;
+    }
+
+    /* honey-inspired header */
+    .hero {
+      background: #f7b42c;
+      background: linear-gradient(135deg, #f7b32b 0%, #f6a01b 100%);
+      padding: 1.8rem 2rem 1.2rem 2rem;
+      text-align: center;
+      color: #2d1f00;
+    }
+
+    .hero i {
+      font-size: 3.2rem;
+      filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.2));
+    }
+
+    .hero h1 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      letter-spacing: -0.3px;
+      margin: 0.5rem 0 0.25rem;
+      text-shadow: 0 1px 1px rgba(255,255,200,0.8);
+    }
+
+    .hero .tagline {
+      font-weight: 600;
+      opacity: 0.9;
+      font-size: 1rem;
+      background: rgba(45,31,0,0.1);
+      display: inline-block;
+      padding: 0.2rem 1rem;
+      border-radius: 40px;
+      backdrop-filter: blur(2px);
+    }
+
+    /* content area */
+    .info-section {
+      padding: 2rem 2rem 1.5rem;
+    }
+
+    .detail-row {
+      display: flex;
+      align-items: baseline;
+      flex-wrap: wrap;
+      margin-bottom: 1.3rem;
+      border-bottom: 1px dashed #f0e2cc;
+      padding-bottom: 0.8rem;
+    }
+
+    .detail-label {
+      width: 100px;
+      font-weight: 700;
+      color: #aa6f20;
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .detail-value {
+      flex: 1;
+      font-weight: 600;
+      font-size: 1.2rem;
+      color: #2c2418;
+      word-break: break-word;
+    }
+
+    .badge-nafdac {
+      background: #eef2e6;
+      border-left: 5px solid #f7b32b;
+      padding: 0.9rem 1.2rem;
+      border-radius: 1.2rem;
+      margin: 1.2rem 0 1.5rem 0;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .badge-nafdac i {
+      font-size: 2rem;
+      color: #f7b32b;
+    }
+
+    .nafdac-text {
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+
+    .nafdac-code {
+      font-family: monospace;
+      background: #fff2df;
+      padding: 0.2rem 0.6rem;
+      border-radius: 30px;
+      font-weight: 800;
+      letter-spacing: 1px;
+    }
+
+    /* QR CODE CARD */
+    .qr-container {
+      background: #fef9ef;
+      border-radius: 1.8rem;
+      padding: 1.5rem;
+      margin: 1rem 0 1.8rem 0;
+      text-align: center;
+      border: 2px solid #ffdfaa;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.03);
+    }
+
+    .qr-title {
+      font-weight: 700;
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+      color: #b4621a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .qr-code-box {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: white;
+      padding: 1rem;
+      border-radius: 28px;
+      display: inline-block;
+      margin: 0 auto;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+
+    canvas {
+      display: block;
+      margin: 0 auto;
+      width: 180px;
+      height: 180px;
+      border-radius: 20px;
+    }
+
+    .scan-note {
+      margin-top: 1rem;
+      font-size: 0.85rem;
+      background: #fff0db;
+      display: inline-block;
+      padding: 0.3rem 1rem;
+      border-radius: 40px;
+      color: #7a4c12;
+      font-weight: 500;
+    }
+
+    .qr-footnote {
+      font-size: 0.75rem;
+      color: #876b42;
+      margin-top: 0.7rem;
+    }
+
+    /* description & authenticity */
+    .description {
+      background: #faf5ea;
+      border-radius: 1.5rem;
+      padding: 1.2rem 1.5rem;
+      margin-top: 1rem;
+      font-size: 0.95rem;
+      line-height: 1.45;
+      color: #3e2e1c;
+      border: 1px solid #f7e3c6;
+    }
+
+    .description i {
+      color: #f7b32b;
+      margin-right: 6px;
+    }
+
+    .footer-note {
+      text-align: center;
+      margin-top: 1.5rem;
+      padding-top: 0.8rem;
+      border-top: 1px solid #f0e0ca;
+      font-size: 0.7rem;
+      color: #a88253;
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    /* responsive */
+    @media (max-width: 550px) {
+      body {
+        padding: 1rem;
+      }
+      .info-section {
+        padding: 1.5rem;
+      }
+      .detail-label {
+        width: 85px;
+        font-size: 0.8rem;
+      }
+      .detail-value {
+        font-size: 1rem;
+      }
+      .hero h1 {
+        font-size: 1.7rem;
+      }
+      canvas {
+        width: 150px;
+        height: 150px;
+      }
+    }
+
+    button, .fake-btn {
+      background: none;
+      border: none;
+    }
+
+    /* subtle hover effect */
+    .product-card:hover {
+      transform: scale(1.01);
+      transition: 0.2s;
+    }
+  </style>
+  <!-- QR Code library: qrcode-generator (lightweight) -->
+  <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js"></script>
+</head>
+<body>
+
+<div class="product-card">
+  <div class="hero">
+    <i class="fas fa-droplet" style="opacity:0.9"></i>
+    <i class="fas fa-leaf" style="margin-left: 8px;"></i>
+    <h1>FREKA NATURAL HONEY</h1>
+    <div class="tagline">100% Pure • Raw • Unfiltered</div>
+  </div>
+
+  <div class="info-section">
+    <!-- product identifiers -->
+    <div class="detail-row">
+      <span class="detail-label"><i class="fas fa-weight-hanging"></i> Size</span>
+      <span class="detail-value">500ml <span style="font-weight: normal; font-size: 0.85rem;">| SKU: FNH01</span></span>
+    </div>
+    <div class="detail-row">
+      <span class="detail-label"><i class="fas fa-barcode"></i> SKU</span>
+      <span class="detail-value">FNH01</span>
+    </div>
+    
+    <!-- NAFDAC Section with high visibility -->
+    <div class="badge-nafdac">
+      <i class="fas fa-clipboard-list"></i>
+      <div>
+        <div class="nafdac-text">NAFDAC REGISTERED</div>
+        <div><span class="nafdac-code">A8-109142L</span> <span style="font-size:0.8rem;">(Certified product)</span></div>
+        <div style="font-size:0.75rem; margin-top:5px;">✅ Meets Nigerian food & safety standards</div>
+      </div>
+    </div>
+
+    
+
+    <!-- additional official metadata -->
+    <div class="footer-note">
+      <span><i class="far fa-registered"></i> Freka Honey </span>
+      <span><i class="fas fa-certificate"></i> NAFDAC: A8-109142L</span>
+      <span><i class="fas fa-code-branch"></i> QR verification enabled</span>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function() {
+    // This page is designed as a QR code landing page.
+    // The QR code embedded on the packaging leads here.
+    // On this page we also display a dynamic QR code that can be scanned to re-verify.
+    // For better demonstration, QR code will contain current page URL + product identifier.
+    // But according to "CODE A PAGE TO SHOWCASE THIS INFORMATION IT WILL BE A QR CODE PAGE WHERE THE USER WILL SCAN AND GET THE INFO"
+    // That means: the user scans a physical QR code (on package) -> lands here. And here we also provide a QR code (to share / re-scan) that repeats the same info.
+    // We will generate QR data = the current page's canonical URL + product reference, so that scanning shows product details again.
+    // Additionally we want to embed NAFDAC and SKU info into QR data for tamper-proof consistency.
+    
+    // Build the data string for QR code that contains all product info.
+    // This way, when a user scans the QR code displayed on this page (or the one on bottle), they get the full details.
+    // Since we are building the page for "Freka Natural Honey", we set product information as a structured text/URL.
+    // For better UX: we use a custom verification link format. But it's a static page, we can encode the important credentials.
+    
+    // Option A: encode this page's URL (which will show the info again)
+    // That is the most logical: the QR on the bottle points to this page, and on this page we also show a QR that links to itself.
+    // Let's create a URL that includes query param to ensure it's the same page but also shows verification.
+    // But since we are already in the page, we can just encode the full current URL (without any hash)
+    let currentUrl = window.location.href;
+    // remove any trailing hash or fragment to keep clean
+    currentUrl = currentUrl.split('#')[0];
+    // Additionally we could add a '?v=authentic' to signal, but it's not necessary.
+    // For offline verification or extra clarity: we also embed product details as text.
+    // According to best practice, the QR code can contain a text block: "FREKA NATURAL HONEY | 500ml | SKU:FNH01 | NAFDAC:A8-109142L | Verify at: " + currentUrl
+    // That way, any generic QR scanner shows essential details.
+    
+    // But the requirement: "CODE A PAGE TO SHOWCASE THIS INFORMATION IT WILL BE A QR CODE PAGE WHERE THE USER WILL SCAN AND GET THE INFO"
+    // So I will create a QR code that displays all core details in plain text + URL to re-access same page. Maximum compatibility.
+    const productTitle = "FREKA NATURAL HONEY";
+    const size = "500ml";
+    const sku = "FNH01";
+    const nafdac = "A8-109142L";
+    const verificationMessage = `Product: ${productTitle}\nSize: ${size}\nSKU: ${sku}\nNAFDAC Reg: ${nafdac}\nOfficial info: ${currentUrl}`;
+    
+    // Generate QR code using qrcode-generator library (pure JS, no external heavy deps)
+    // The library is loaded from CDN. We'll generate a QR code with error correction Q (approx 25% recovery)
+    // We need to ensure the QR code is drawn on canvas.
+    function generateQRCode(text, targetElementId) {
+      if (!window.qrcode) {
+        console.warn("QR library not loaded yet? retry soon");
+        return false;
+      }
+      try {
+        // Use version based on text length (auto)
+        let qr = qrcode(0, 'M'); // type number 0 = automatic, error correction 'M'
+        qr.addData(text);
+        qr.make();
+        // get cell count
+        const cellSize = 4;        // 4px per module
+        const margin = 4;          // margin in modules
+        const qrSize = qr.getModuleCount();
+        const canvasSize = (qrSize + margin * 2) * cellSize;
+        
+        // Create canvas element
+        const canvas = document.createElement('canvas');
+        canvas.width = canvasSize;
+        canvas.height = canvasSize;
+        const ctx = canvas.getContext('2d');
+        
+        // fill background white
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(0, 0, canvasSize, canvasSize);
+        
+        // draw dark modules
+        ctx.fillStyle = '#1e2a1a';   // deep honey-dark
+        for (let row = 0; row < qrSize; row++) {
+          for (let col = 0; col < qrSize; col++) {
+            if (qr.isDark(row, col)) {
+              const x = (col + margin) * cellSize;
+              const y = (row + margin) * cellSize;
+              ctx.fillRect(x, y, cellSize, cellSize);
+            }
+          }
+        }
+        
+        // Optional: add a subtle honey-colored border effect
+        ctx.strokeStyle = '#f7b32b';
+        ctx.lineWidth = 2;
+        ctx.strokeRect(2, 2, canvasSize - 4, canvasSize - 4);
+        
+        // clear container and append canvas
+        const container = document.getElementById(targetElementId);
+        if (container) {
+          container.innerHTML = '';
+          container.appendChild(canvas);
+        }
+        return true;
+      } catch(e) {
+        console.error("QR generation error", e);
+        const container = document.getElementById(targetElementId);
+        if(container) container.innerHTML = '<div style="padding:20px; background:#ffe6cc; border-radius:16px;">⚠️ QR code error, but product info is valid.</div>';
+        return false;
+      }
+    }
+    
+    // For robust loading: wait for DOM + library
+    function initQR() {
+      const targetDiv = "qrcodeCanvas";
+      if (document.getElementById(targetDiv)) {
+        // Check if qrcode library ready
+        if (typeof qrcode !== 'undefined') {
+          generateQRCode(verificationMessage, targetDiv);
+        } else {
+          // fallback: wait a bit for library
+          let attempts = 0;
+          const interval = setInterval(() => {
+            if (typeof qrcode !== 'undefined') {
+              clearInterval(interval);
+              generateQRCode(verificationMessage, targetDiv);
+            } else if (attempts > 30) {
+              clearInterval(interval);
+              document.getElementById(targetDiv).innerHTML = '<div style="color:#b4621a;"><i class="fas fa-qrcode"></i> Please refresh to load QR.</div>';
+            }
+            attempts++;
+          }, 100);
+        }
+      }
+    }
+    
+    // Also consider if the page URL changes due to hash, but verificationMessage uses currentUrl
+    // For dynamic consistency, if there is any referral param, we keep it.
+    // Also we want to show that scanning the physical QR code leads to this page. On page load we can simulate a scan "verified" effect optionally.
+    // Add an additional subtle animation to highlight the QR box? no need.
+    window.addEventListener('DOMContentLoaded', () => {
+      initQR();
+      // Optional: add a small tooltip indicating the QR code contains full product + link
+      const container = document.querySelector('.qr-container');
+      if(container && !container.hasAttribute('data-tip')) {
+        const tipSpan = document.createElement('div');
+        tipSpan.className = 'qr-footnote';
+        tipSpan.style.marginTop = '8px';
+        tipSpan.innerHTML = '<i class="fas fa-info-circle"></i> QR includes product credentials & page link — scan to share or verify again';
+        container.appendChild(tipSpan);
+      }
+    });
+    
+    // Ensure resize doesn't affect QR (no need, static canvas)
+    // Additional feature: allow copying of NAFDAC to clipboard maybe (but not needed)
+    // Make sure the displayed SKU matches CODE FNH01 and NAFDAC.
+    // Also for demonstration we highlight the QR value in console, but no user impact.
+    console.log("Freka Natural Honey QR verification page ready | NAFDAC: A8-109142L | SKU: FNH01");
+  })();
+</script>
+
+<!-- extra fallback: if library fails, alternative styling; but library is reliable -->
+<noscript>
+  <div style="background:#f8d7a0; padding:1rem; text-align:center;">JavaScript required for QR generation. All product info visible: Freka Natural Honey 500ml, SKU FNH01, NAFDAC A8-109142L.</div>
+</noscript>
+</body>
+</html>

@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Protocol & Etiquette | Orovie Hospitality Institute</title>
+    <link rel="icon" type="image/x-icon" href="logo.png">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <style>
+        :root {
+            --accent: #b8926a; 
+            --accent-dark: #9b6e48;
+            --bg: #fdfcfb;     
+            --ink: #1a1a1a;    
+            --muted: #7a7a7a;
+            --white: #ffffff;
+            --light-beige: #faf8f5;
+            --transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Montserrat', sans-serif; 
+            background-color: var(--bg); 
+            color: var(--ink);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, .logo { font-family: 'Cormorant Garamond', serif; font-weight: 300; }
+
+        /* --- NAVIGATION (identical to main site) --- */
+        nav {
+            position: fixed;
+            top: 0; width: 100%;
+            padding: 40px 5%;
+            display: flex; justify-content: space-between; align-items: center;
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        nav.scrolled {
+            padding: 20px 5%;
+            background: rgba(253, 252, 251, 0.98);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .logo { font-size: 1.5rem; letter-spacing: 2px; text-decoration: none; color: var(--ink); flex: 1; font-weight: 500; }
+
+        .nav-links { display: flex; gap: 40px; list-style: none; align-items: center; }
+        .nav-links a {
+            text-decoration: none;
+            color: var(--ink);
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: var(--transition);
+        }
+        .nav-links a:hover, .nav-links a.active { color: var(--accent); }
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        /* dropdown */
+        .nav-links li {
+            position: relative;
+            display: inline-block;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #ffffff;
+            min-width: 220px;
+            box-shadow: 0px 8px 16px rgba(0,0,0,0.1);
+            z-index: 1;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            border-radius: 4px;
+            top: 100%;
+            left: 0;
+        }
+        .dropdown-content li a {
+            color: #333;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            transition: background 0.3s;
+            font-size: 0.7rem;
+            letter-spacing: 1px;
+        }
+        .dropdown-content li a:hover {
+            background-color: #f1f1f1;
+            color: var(--accent);
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        .dropbtn i {
+            font-size: 12px;
+            margin-left: 5px;
+        }
+
+        /* Hero */
+        .hero-protocol {
+            min-height: 65vh;
+            padding: 180px 5% 100px;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.5)), url(' ') center/cover fixed;
+            display: flex;
+            align-items: flex-end;
+            color: white;
+        }
+        .hero-protocol .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        .hero-protocol h1 {
+            font-size: clamp(3rem, 8vw, 5.5rem);
+            line-height: 1.1;
+            font-weight: 500;
+        }
+        .hero-protocol p {
+            font-size: 1.1rem;
+            max-width: 650px;
+            margin-top: 20px;
+            opacity: 0.9;
+        }
+
+        /* Section utilities */
+        .section-padding {
+            padding: 100px 5%;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.5rem, 4vw, 3.8rem);
+            line-height: 1.2;
+            margin-bottom: 20px;
+            color: var(--ink);
+        }
+        .section-sub {
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        /* Curriculum Grid */
+        .curriculum-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        .course-card {
+            background: var(--white);
+            padding: 28px;
+            border-radius: 12px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.03);
+            transition: var(--transition);
+            border: 1px solid rgba(184,146,106,0.15);
+        }
+        .course-card:hover {
+            transform: translateY(-6px);
+            border-color: var(--accent);
+            box-shadow: 0 25px 40px rgba(0,0,0,0.05);
+        }
+        .course-code {
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            color: var(--accent);
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+        .course-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+        .course-desc {
+            font-size: 0.85rem;
+            color: var(--muted);
+            line-height: 1.5;
+        }
+
+        /* two column for requirements */
+        .two-col-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: start;
+        }
+        .requirement-list {
+            list-style: none;
+        }
+        .requirement-list li {
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            font-size: 0.95rem;
+        }
+        .requirement-list i {
+            color: var(--accent);
+            width: 22px;
+            font-size: 1rem;
+        }
+        .info-card {
+            background: var(--light-beige);
+            padding: 40px;
+            border-radius: 24px;
+        }
+        .info-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+        .badge-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin: 25px 0;
+        }
+        .badge {
+            background: white;
+            padding: 8px 20px;
+            border-radius: 40px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--ink);
+            border: 1px solid var(--accent);
+        }
+
+        .btn-luxury {
+            display: inline-block;
+            padding: 18px 40px;
+            border: 1px solid var(--ink);
+            color: var(--ink);
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+        .btn-luxury.dark {
+            background: var(--ink);
+            color: var(--white);
+            border: none;
+        }
+        .btn-luxury.dark:hover {
+            background: var(--accent);
+        }
+        footer {
+            background: #f4f1ee;
+            text-align: center;
+            padding: 50px 5%;
+            border-top: 1px solid rgba(0,0,0,0.05);
+        }
+
+        @media (max-width: 992px) {
+            nav { padding: 20px 5%; background: var(--bg); }
+            .menu-toggle { display: block; }
+            .nav-links {
+                position: fixed;
+                top: 0; right: -100%;
+                height: 100vh; width: 80%;
+                background: var(--white);
+                flex-direction: column;
+                justify-content: center;
+                transition: 0.5s ease-in-out;
+                box-shadow: -10px 0 30px rgba(0,0,0,0.05);
+                gap: 30px;
+            }
+            .nav-links.active { right: 0; }
+            .two-col-layout { grid-template-columns: 1fr; gap: 40px; }
+            .hero-protocol { background-attachment: scroll; }
+        }
+        @media (max-width: 600px) {
+            .section-padding { padding: 60px 5%; }
+            .curriculum-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+<nav id="navbar">
+    <a href="index.html" class="logo">Orovie Hospitality Institute</a>
+    <ul class="nav-links" id="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="About.html">About</a></li>
+        <li class="dropdown">
+            <a href="Courses.html" class="dropbtn">Courses <i class="fa-solid fa-caret-down"></i></a>
+            <ul class="dropdown-content">
+                <li><a href="Culinary.html">Culinary Arts</a></li>
+                <li><a href="Baking.html">Baking & Pastry Arts</a></li>
+                <li><a href="Bartending.html">Bartending & Mixology</a></li>
+                <li><a href="Hotel.html">Hotel Administration</a></li>
+                <li><a href="Protocol.html">Protocol & Etiquette</a></li>
+                <li><a href="Events.html">Events Management</a></li>
+                <li><a href="Tourism.html">Tourism Management</a></li>
+                <li><a href="CulinaryManagement.html">Culinary & Food Service MNGT</a></li>
+                <li><a href="Brand_Management.html">Brand Management</a></li>
+            </ul>
+        </li>
+        <li><a href="Mission.html">Mission</a></li>
+        <li><a href="Apply.html">Apply Today</a></li>
+        <li><a href="Contact.html">Contact</a></li>
+    </ul>
+    <div class="menu-toggle" id="mobile-menu">
+        <i class="fa-solid fa-bars"></i>
+    </div>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero-protocol">
+    <div class="container">
+        <h1 data-aos="fade-up">Protocol & <br>Etiquette</h1>
+        <p data-aos="fade-up" data-aos-delay="150">Master the art of diplomatic grace, international protocol, and executive presence. Designed for leaders who represent excellence in every gesture, word, and interaction.</p>
+    </div>
+</section>
+
+<!-- Curriculum based on the provided "Protocol and Etiquette" course outline -->
+<section class="section-padding">
+    <div class="container">
+        <span class="section-sub" data-aos="fade-up">The Art of Distinguished Bearing</span>
+        <h2 class="section-title" data-aos="fade-up" data-aos-delay="50">Comprehensive Protocol Curriculum</h2>
+        <p data-aos="fade-up" data-aos-delay="100">This programme develops students in personal leadership, emotional intelligence, legendary service, titles and forms of address, international protocol, gifts, ceremonies, logistics, and military protocol. Graduates emerge as confident, culturally intelligent professionals equipped for diplomatic, corporate, and luxury service environments.</p>
+        
+        <div class="curriculum-grid" data-aos="fade-up" data-aos-delay="200">
+            <!-- Courses from Protocol and Etiquette document + expanded relevant topics -->
+            <div class="course-card"><div class="course-code">PEL101</div><div class="course-title">Personal Leadership & Emotional Intelligence</div><div class="course-desc">Self-awareness, resilience, empathy, and leading with authenticity in high-stakes settings.</div></div>
+            <div class="course-card"><div class="course-code">PEL102</div><div class="course-title">Legendary Service: Anticipating the Unspoken</div><div class="course-desc">Exceeding expectations, reading guest preferences, and delivering unforgettable experiences.</div></div>
+            <div class="course-card"><div class="course-code">PEL103</div><div class="course-title">Titles, Forms of Address & Social Hierarchies</div><div class="course-desc">Correct usage for royalty, diplomats, officials, and corporate executives globally.</div></div>
+            <div class="course-card"><div class="course-code">PEL104</div><div class="course-title">International Protocol & Gift-Giving Customs</div><div class="course-desc">Cross-cultural nuances, appropriate gifts, and avoiding diplomatic faux pas.</div></div>
+            <div class="course-card"><div class="course-code">PEL105</div><div class="course-title">Introduction to the Master Protocol Process</div><div class="course-desc">Systematic framework for planning and executing protocol-driven events.</div></div>
+            <div class="course-card"><div class="course-code">PEL106</div><div class="course-title">Flags, Logos, Anthems & National Symbols</div><div class="course-desc">Order of precedence, flag etiquette, anthem protocols, and ceremonial usage.</div></div>
+            <div class="course-card"><div class="course-code">PEL107</div><div class="course-title">Ceremonies, Logistics & Administrative Tools</div><div class="course-desc">Seating plans, processions, guest flow, invitations, and run-of-show management.</div></div>
+            <div class="course-card"><div class="course-code">PEL108</div><div class="course-title">Military Protocol & Personal Diplomacy</div><div class="course-desc">Honours, salutes, official visits, and building cross-cultural diplomatic relationships.</div></div>
+            <div class="course-card"><div class="course-code">PEL201</div><div class="course-title">Dining Etiquette: Global Traditions</div><div class="course-desc">American, Continental, Asian, and Middle Eastern dining customs, table settings, and hosting.</div></div>
+            <div class="course-card"><div class="course-code">PEL202</div><div class="course-title">Business Etiquette & Corporate Protocol</div><div class="course-desc">Meeting behaviour, virtual presence, networking, and cross-border business norms.</div></div>
+            <div class="course-card"><div class="course-code">PEL203</div><div class="course-title">Wardrobe & Grooming for Distinction</div><div class="course-desc">Dress codes (white tie, black tie, business formal, smart casual), cultural modesty, and personal presentation.</div></div>
+            <div class="course-card"><div class="course-code">PEL204</div><div class="course-title">Crisis Communication & Poise Under Pressure</div><div class="course-desc">Maintaining composure, managing difficult guests, and reputation protection.</div></div>
+        </div>
+    </div>
+</section>
+
+<!-- Requirements & Professional Attributes -->
+<section class="section-padding" style="background: var(--light-beige);">
+    <div class="container two-col-layout">
+        <div data-aos="fade-right">
+            <span class="section-sub">Programme Prerequisites</span>
+            <h2 class="section-title" style="margin-bottom: 30px;">Eligibility & Requirements</h2>
+            <ul class="requirement-list">
+                <li><i class="fa-solid fa-diploma"></i> High school diploma or equivalent (for certificate)</li>
+                <li><i class="fa-solid fa-comment-dots"></i> Fluent English (additional languages an asset)</li>
+                <li><i class="fa-solid fa-hand-sparkles"></i> Professional demeanour and commitment to refinement</li>
+                <li><i class="fa-solid fa-suitcase"></i> Interview with programme director (in-person or virtual)</li>
+                <li><i class="fa-solid fa-shirt"></i> Business formal attire for all practical sessions</li>
+                <li><i class="fa-solid fa-passport"></i> Openness to cross-cultural learning and international protocols</li>
+            </ul>
+            <div class="badge-list">
+                <span class="badge">Certificate (3 months)</span>
+                <span class="badge">Advanced Diploma (8 months)</span>
+                <span class="badge">Executive Intensive (2 weeks)</span>
+            </div>
+        </div>
+        <div data-aos="fade-left">
+            <div class="info-card">
+                <i class="fa-solid fa-crown" style="font-size: 2rem; color: var(--accent); margin-bottom: 15px; display: inline-block;"></i>
+                <h3>Programme Highlights</h3>
+                <p><strong>Duration:</strong> 3 months (Certificate) | 8 months (Advanced Diploma with practicum)<br>
+                <strong>Format:</strong> Highly interactive workshops, case studies, simulated diplomatic events, and real-world protocol exercises.<br>
+                <strong>Unique features:</strong> Live ceremonial simulations, flag and anthem drills, and guest lectures by former diplomats and chief of protocol officers.</p>
+                <hr style="margin: 25px 0; border-color: rgba(0,0,0,0.05);">
+                <h3 style="font-size: 1.4rem;">Key Competencies Gained</h3>
+                <ul style="list-style: none; margin-top: 15px;">
+                    <li style="margin-bottom: 10px;">✓ Confidently host VIPs, dignitaries, and C-suite executives</li>
+                    <li style="margin-bottom: 10px;">✓ Design and execute flawless protocol-driven events</li>
+                    <li style="margin-bottom: 10px;">✓ Navigate cultural sensitivities with grace</li>
+                    <li style="margin-bottom: 10px;">✓ Master international dining and social etiquette</li>
+                    <li>✓ Represent organisations at the highest diplomatic and corporate levels</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Philosophy: The Orovie Standard -->
+<section class="section-padding">
+    <div class="container two-col-layout" style="gap: 50px;">
+        <div data-aos="fade-up">
+            <img src="https://i.pinimg.com/736x/c8/22/2e/c8222ec77ccd4d0d97377ff152c27db9.jpg" alt="Diplomatic Etiquette Training" style="width: 100%; border-radius: 28px; box-shadow: 0 20px 35px rgba(0,0,0,0.05);">
+        </div>
+        <div data-aos="fade-up" data-aos-delay="150">
+            <span class="section-sub">The Orovie Distinction</span>
+            <h2 class="section-title">Where Refinement Meets Professionalism</h2>
+            <p style="margin-bottom: 20px;">We understand the diversity and backgrounds of the various cultures within our industry, but affirm the all-important need for professionalism. Our Protocol & Etiquette programme goes beyond rules — it cultivates a mindset of respect, cultural intelligence, and impeccable judgment.</p>
+            <p>Whether you aspire to serve in presidential palaces, international organisations, luxury hotels, or corporate boardrooms, Orovie’s protocol training gives you the confidence and competence to move with ease in any elite environment.</p>
+            <div style="margin-top: 35px;">
+                <a href="Apply.html" class="btn-luxury dark">Elevate Your Presence →</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Institutional Values: Integrity & Cultural Understanding -->
+<section class="practical-note" style="background: var(--ink); color: white;">
+    <div class="container" data-aos="zoom-in">
+        <i class="fa-solid fa-handshake" style="font-size: 3rem; color: var(--accent); margin-bottom: 20px; display: inline-block;"></i>
+        <h2 style="font-family: 'Cormorant Garamond'; font-size: 2.5rem; margin-bottom: 20px;">Integrity & Cultural Understanding</h2>
+        <p style="max-width: 750px; margin: 0 auto; opacity: 0.85;">"Our vision is to create a better world through education, integrity and cultural understanding. We take pride in engaging in business with integrity and we make our decisions based on honesty and ethical behaviour."</p>
+        <p style="margin-top: 20px;">Every protocol graduate becomes an ambassador of these values, bridging cultures and elevating the standard of global hospitality.</p>
+    </div>
+</section>
+
+<!-- Career Destinations -->
+<section class="section-padding">
+    <div class="container" style="text-align: center;">
+        <span class="section-sub">Elite Career Pathways</span>
+        <h2 class="section-title">Where Protocol Experts Thrive</h2>
+        <div class="badge-list" style="justify-content: center; margin: 40px 0;">
+            <span class="badge">Chief of Protocol</span>
+            <span class="badge">Diplomatic Liaison</span>
+            <span class="badge">Corporate Etiquette Consultant</span>
+            <span class="badge">Luxury Concierge</span>
+            <span class="badge">Executive Assistant (C-Suite)</span>
+            <span class="badge">Event & Protocol Director</span>
+            <span class="badge">VIP Guest Relations Manager</span>
+            <span class="badge">Embassy Protocol Officer</span>
+        </div>
+        <p style="max-width: 800px; margin: 0 auto;">Graduates of Orovie's Protocol & Etiquette programme are sought after by government institutions, international organisations, five-star hotels, royal households, and global corporations. The mastery of protocol is a timeless, high-value skill that opens doors to the world's most prestigious roles.</p>
+    </div>
+</section>
+
+<footer>
+    <p style="color: #5a5a5a; font-size: 0.85rem;">&copy; 2025 Orovie Hospitality Institute. Excellence Refined. — Protocol & Etiquette Programme</p>
+</footer>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    AOS.init({ duration: 1000, once: true });
+    window.addEventListener('scroll', () => {
+        const nav = document.getElementById('navbar');
+        if (window.scrollY > 80) nav.classList.add('scrolled');
+        else nav.classList.remove('scrolled');
+    });
+    const mobileMenu = document.getElementById('mobile-menu');
+    const navLinks = document.getElementById('nav-links');
+    mobileMenu.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+        const icon = mobileMenu.querySelector('i');
+        icon.classList.toggle('fa-bars');
+        icon.classList.toggle('fa-times');
+    });
+    document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', () => {
+            navLinks.classList.remove('active');
+            const icon = mobileMenu.querySelector('i');
+            if(icon) { icon.classList.add('fa-bars'); icon.classList.remove('fa-times'); }
+        });
+    });
+</script>
+</body>
+</html>

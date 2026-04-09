@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enroll Now | Orovie Hospitality Institute</title>
+    <link rel="icon" type="image/x-icon" href="logo.png">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <style>
+        :root {
+            --accent: #b8926a; 
+            --accent-dark: #9b6e48;
+            --bg: #fdfcfb;     
+            --ink: #1a1a1a;    
+            --muted: #7a7a7a;
+            --white: #ffffff;
+            --light-beige: #faf8f5;
+            --transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Montserrat', sans-serif; 
+            background-color: var(--bg); 
+            color: var(--ink);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, .logo { font-family: 'Cormorant Garamond', serif; font-weight: 300; }
+
+        /* --- NAVIGATION --- */
+        nav {
+            position: fixed;
+            top: 0; width: 100%;
+            padding: 40px 5%;
+            display: flex; justify-content: space-between; align-items: center;
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        nav.scrolled {
+            padding: 20px 5%;
+            background: rgba(253, 252, 251, 0.98);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .logo { font-size: 1.5rem; letter-spacing: 2px; text-decoration: none; color: var(--ink); flex: 1; font-weight: 500; }
+
+        .nav-links { display: flex; gap: 40px; list-style: none; align-items: center; }
+        .nav-links a {
+            text-decoration: none;
+            color: var(--ink);
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: var(--transition);
+        }
+        .nav-links a:hover, .nav-links a.active { color: var(--accent); }
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #ffffff;
+            min-width: 240px;
+            box-shadow: 0px 8px 16px rgba(0,0,0,0.1);
+            z-index: 1;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            border-radius: 4px;
+            top: 100%;
+            left: 0;
+        }
+        .dropdown-content li a {
+            color: #333;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            transition: background 0.3s;
+            font-size: 0.7rem;
+            letter-spacing: 1px;
+        }
+        .dropdown-content li a:hover {
+            background-color: #f1f1f1;
+            color: var(--accent);
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        .dropbtn i {
+            font-size: 12px;
+            margin-left: 5px;
+        }
+
+        /* Hero */
+        .hero-enroll {
+            min-height: 50vh;
+            padding: 180px 5% 80px;
+            background: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.45)), url('https://i.pinimg.com/1200x/29/70/10/297010225e62b4ea939c0b226cf577ae.jpg ') center/cover;
+            display: flex;
+            align-items: flex-end;
+            color: white;
+        }
+        .hero-enroll .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        .hero-enroll h1 {
+            font-size: clamp(3rem, 8vw, 5rem);
+            line-height: 1.1;
+            font-weight: 500;
+        }
+        .hero-enroll p {
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin-top: 20px;
+            opacity: 0.9;
+        }
+
+        /* Form Section */
+        .form-section {
+            padding: 80px 5%;
+            background: var(--light-beige);
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.2rem, 4vw, 3.2rem);
+            line-height: 1.2;
+            margin-bottom: 15px;
+            color: var(--ink);
+            text-align: center;
+        }
+        .section-sub {
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            display: block;
+            text-align: center;
+        }
+        .form-description {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 50px;
+            color: var(--muted);
+        }
+
+        /* Form Styles */
+        .enrollment-form {
+            background: var(--white);
+            border-radius: 24px;
+            padding: 50px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.05);
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group.full-width {
+            grid-column: span 2;
+        }
+        label {
+            display: block;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--ink);
+            margin-bottom: 8px;
+        }
+        label .required {
+            color: var(--accent);
+            margin-left: 3px;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 14px 16px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            border: 1px solid #e0ddd9;
+            border-radius: 8px;
+            background: var(--white);
+            transition: var(--transition);
+        }
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(184,146,106,0.1);
+        }
+        select {
+            cursor: pointer;
+            appearance: none;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="%23888" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>');
+            background-repeat: no-repeat;
+            background-position: right 16px center;
+        }
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin: 15px 0;
+        }
+        .checkbox-group input {
+            width: auto;
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+        .checkbox-group label {
+            margin-bottom: 0;
+            text-transform: none;
+            font-weight: 400;
+            font-size: 0.85rem;
+            cursor: pointer;
+        }
+        .btn-submit {
+            background: var(--ink);
+            color: var(--white);
+            border: none;
+            padding: 18px 40px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            border-radius: 40px;
+            cursor: pointer;
+            transition: var(--transition);
+            width: 100%;
+            margin-top: 20px;
+        }
+        .btn-submit:hover {
+            background: var(--accent);
+        }
+        .btn-submit:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        .alert {
+            padding: 15px 20px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            font-size: 0.85rem;
+        }
+        .alert-success {
+            background: #e6f4ea;
+            color: #1e7e34;
+            border-left: 4px solid #1e7e34;
+        }
+        .alert-error {
+            background: #fce8e6;
+            color: #c62828;
+            border-left: 4px solid #c62828;
+        }
+        .form-footer {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 0.75rem;
+            color: var(--muted);
+        }
+        @media (max-width: 768px) {
+            .form-grid { grid-template-columns: 1fr; }
+            .form-group.full-width { grid-column: span 1; }
+            .enrollment-form { padding: 30px 20px; }
+            nav { padding: 20px 5%; background: var(--bg); }
+            .menu-toggle { display: block; }
+            .nav-links {
+                position: fixed;
+                top: 0; right: -100%;
+                height: 100vh; width: 80%;
+                background: var(--white);
+                flex-direction: column;
+                justify-content: center;
+                transition: 0.5s ease-in-out;
+                box-shadow: -10px 0 30px rgba(0,0,0,0.05);
+                gap: 30px;
+            }
+            .nav-links.active { right: 0; }
+        }
+        footer {
+            background: #f4f1ee;
+            text-align: center;
+            padding: 50px 5%;
+            border-top: 1px solid rgba(0,0,0,0.05);
+        }
+    </style>
+</head>
+<body>
+<nav id="navbar">
+    <a href="index.html" class="logo">Orovie Hospitality Institute</a>
+    <ul class="nav-links" id="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="About.html">About</a></li>
+        <li class="dropdown">
+            <a href="Courses.html" class="dropbtn">Courses <i class="fa-solid fa-caret-down"></i></a>
+            <ul class="dropdown-content">
+                <li><a href="Culinary.html">Culinary Arts</a></li>
+                <li><a href="Baking.html">Baking & Pastry Arts</a></li>
+                <li><a href="Bartending.html">Bartending & Mixology</a></li>
+                <li><a href="Hotel.html">Hotel Administration</a></li>
+                <li><a href="Protocol.html">Protocol & Etiquette</a></li>
+                <li><a href="Events.html">Events Management</a></li>
+                <li><a href="Tourism.html">Tourism Management</a></li>
+                <li><a href="CulinaryManagement.html">Culinary & Food Service MNGT</a></li>
+                <li><a href="Brand_Management.html">Brand Management</a></li>
+            </ul>
+        </li>
+        <li><a href="Mission.html">Mission</a></li>
+        <li><a href="Apply.html" class="active">Apply Today</a></li>
+        <li><a href="Contact.html">Contact</a></li>
+    </ul>
+    <div class="menu-toggle" id="mobile-menu">
+        <i class="fa-solid fa-bars"></i>
+    </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero-enroll">
+    <div class="container">
+        <h1 data-aos="fade-up">Begin Your<br>Journey</h1>
+        <p data-aos="fade-up" data-aos-delay="150">Take the first step toward a distinguished career in hospitality, culinary arts, or brand leadership. Complete the form below to start your application.</p>
+    </div>
+</section>
+
+<!-- Enrollment Form Section -->
+<section class="form-section">
+    <div class="container">
+        <span class="section-sub" data-aos="fade-up">Apply Now</span>
+        <h2 class="section-title" data-aos="fade-up" data-aos-delay="50">Enrollment Application</h2>
+        <p class="form-description" data-aos="fade-up" data-aos-delay="100">Please fill out all required fields. Our admissions team will review your application and contact you within 3-5 business days.</p>
+        
+        <div class="enrollment-form" data-aos="fade-up" data-aos-delay="150">
+            <div id="form-status"></div>
+            
+            <!-- Formspree endpoint - REPLACE 'YOUR_FORM_ID' with your actual Formspree form ID -->
+            <form id="enrollmentForm" action="https://formspree.io/f/xdkokewd" method="POST">
+                <div class="form-grid">
+                    <!-- Personal Information -->
+                    <div class="form-group">
+                        <label>Full Name <span class="required">*</span></label>
+                        <input type="text" name="full_name" placeholder="First and Last Name" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Date of Birth <span class="required">*</span></label>
+                        <input type="date" name="date_of_birth" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Email Address <span class="required">*</span></label>
+                        <input type="email" name="email" placeholder="you@example.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Phone Number <span class="required">*</span></label>
+                        <input type="tel" name="phone" placeholder="+1234567890" required>
+                    </div>
+                    
+                    <!-- Address -->
+                    <div class="form-group full-width">
+                        <label>Residential Address</label>
+                        <input type="text" name="address" placeholder="Street, City, State/Province, Postal Code">
+                    </div>
+                    
+                    <!-- Program Selection -->
+                    <div class="form-group">
+                        <label>Program of Interest <span class="required">*</span></label>
+                        <select name="program" required>
+                            <option value="">-- Select Program --</option>
+                            <option value="Culinary Arts">Culinary Arts</option>
+                            <option value="Baking & Pastry Arts">Baking & Pastry Arts</option>
+                            <option value="Bartending & Mixology">Bartending & Mixology</option>
+                            <option value="Hotel Administration">Hotel Administration</option>
+                            <option value="Protocol & Etiquette">Protocol & Etiquette</option>
+                            <option value="Events Management">Events Management</option>
+                            <option value="Tourism Management">Tourism Management</option>
+                            <option value="Culinary & Food Service Management">Culinary & Food Service Management</option>
+                            <option value="Brand Management">Brand Management</option>
+                        </select>
+                    </div>
+                   
+                    
+                    <!-- Education Background -->
+                    <div class="form-group">
+                        <label>Highest Education Level <span class="required">*</span></label>
+                        <select name="education_level" required>
+                            <option value="">-- Select --</option>
+                            <option value="High School Diploma">High School Diploma</option>
+                            <option value="Bachelor's Degree">Bachelor's Degree</option>
+                            <option value="Master's Degree">Master's Degree</option>
+                            <option value="Vocational/Technical Certificate">Vocational/Technical Certificate</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Institution Name</label>
+                        <input type="text" name="institution" placeholder="School/University Name">
+                    </div>
+                    
+                    <!-- Additional Information -->
+                    <div class="form-group">
+                        <label>How did you hear about us?</label>
+                        <select name="referral_source">
+                            <option value="">-- Select --</option>
+                            <option value="Social Media">Social Media</option>
+                            <option value="Search Engine">Search Engine</option>
+                            <option value="Friend/Family">Friend/Family</option>
+                            <option value="Advertisement">Advertisement</option>
+                            <option value="Email Campaign">Email Campaign</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Preferred Start Date</label>
+                        <select name="start_date">
+                            <option value="">-- Select --</option>
+                            <option value="Next Intake (January)">Next Intake (January)</option>
+                            <option value="Next Intake (April)">Next Intake (April)</option>
+                            <option value="Next Intake (September)">Next Intake (September)</option>
+                            <option value="Flexible / As soon as possible">Flexible / As soon as possible</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group full-width">
+                        <label>Previous Hospitality/Culinary Experience (if any)</label>
+                        <textarea name="experience" placeholder="Briefly describe any relevant work experience, internships, or training..."></textarea>
+                    </div>
+                    
+                    <div class="form-group full-width">
+                        <label>Why do you want to study at Orovie Hospitality Institute?</label>
+                        <textarea name="motivation" placeholder="Share your passion, goals, and what draws you to our institute..."></textarea>
+                    </div>
+                    
+                    <div class="form-group full-width">
+                        <label>Additional Comments or Questions</label>
+                        <textarea name="comments" placeholder="Any special accommodations, dietary needs (for practical sessions), or questions for our admissions team..."></textarea>
+                    </div>
+                    
+                    <!-- Consent Checkboxes -->
+                    <div class="form-group full-width">
+                        <div class="checkbox-group">
+                            <input type="checkbox" name="contact_consent" value="yes" id="contactConsent" required>
+                            <label for="contactConsent">I consent to be contacted by Orovie Hospitality Institute regarding my application and program updates. <span class="required">*</span></label>
+                        </div>
+                        <div class="checkbox-group">
+                            <input type="checkbox" name="data_consent" value="yes" id="dataConsent" required>
+                            <label for="dataConsent">I confirm that the information provided is accurate and complete to the best of my knowledge. <span class="required">*</span></label>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Honeypot for spam protection (optional but recommended) -->
+                <input type="text" name="_gotcha" style="display:none">
+                
+                <!-- Custom redirect after successful submission -->
+                <input type="hidden" name="_next" value="https://orovie.edu/thank-you.html">
+                
+                <button type="submit" class="btn-submit" id="submitBtn">Submit Application <i class="fa-solid fa-arrow-right-long"></i></button>
+                <div class="form-footer">
+                    <i class="fa-solid fa-lock"></i> Your information is secure. We respect your privacy.
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+<!-- Why Choose Orovie -->
+<section class="section-padding" style="background: var(--white); padding: 60px 5%;">
+    <div class="container" style="text-align: center;">
+        <span class="section-sub">Why Orovie</span>
+        <h2 class="section-title">Excellence Refined</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; margin-top: 50px;">
+            <div><i class="fa-solid fa-award" style="font-size: 2rem; color: var(--accent);"></i><h3 style="margin: 15px 0 10px;">Industry Recognition</h3><p style="font-size: 0.85rem;">Ranked among Nigeria's premier hospitality institutes.</p></div>
+            <div><i class="fa-solid fa-hand-sparkles" style="font-size: 2rem; color: var(--accent);"></i><h3 style="margin: 15px 0 10px;">Hands-on Training</h3><p style="font-size: 0.85rem;">70% practical, 30% theory — real-world experience.</p></div>
+            <div><i class="fa-solid fa-globe" style="font-size: 2rem; color: var(--accent);"></i><h3 style="margin: 15px 0 10px;">Global Network</h3><p style="font-size: 0.85rem;">Partnerships with leading hotels and brands worldwide.</p></div>
+            <div><i class="fa-solid fa-user-graduate" style="font-size: 2rem; color: var(--accent);"></i><h3 style="margin: 15px 0 10px;">Career Support</h3><p style="font-size: 0.85rem;">Internship placement and job assistance for all graduates.</p></div>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <p style="color: #5a5a5a; font-size: 0.85rem;">&copy; 2025 Orovie Hospitality Institute. Excellence Refined. — Begin Your Journey</p>
+</footer>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    AOS.init({ duration: 1000, once: true });
+    
+    // Navbar scroll effect
+    window.addEventListener('scroll', () => {
+        const nav = document.getElementById('navbar');
+        if (window.scrollY > 80) nav.classList.add('scrolled');
+        else nav.classList.remove('scrolled');
+    });
+    
+    // Mobile menu toggle
+    const mobileMenu = document.getElementById('mobile-menu');
+    const navLinks = document.getElementById('nav-links');
+    mobileMenu.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+        const icon = mobileMenu.querySelector('i');
+        icon.classList.toggle('fa-bars');
+        icon.classList.toggle('fa-times');
+    });
+    document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', () => {
+            navLinks.classList.remove('active');
+            const icon = mobileMenu.querySelector('i');
+            if(icon) { icon.classList.add('fa-bars'); icon.classList.remove('fa-times'); }
+        });
+    });
+    
+    // Form submission handling with Formspree
+    const form = document.getElementById('enrollmentForm');
+    const statusDiv = document.getElementById('form-status');
+    const submitBtn = document.getElementById('submitBtn');
+    
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        // Disable button and show loading state
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Submitting...';
+        statusDiv.innerHTML = '';
+        
+        const formData = new FormData(form);
+        
+        try {
+            const response = await fetch(form.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            });
+            
+            if (response.ok) {
+                statusDiv.innerHTML = '<div class="alert alert-success"><i class="fa-solid fa-circle-check"></i> ✅ Application submitted successfully! Our admissions team will contact you within 3-5 business days.</div>';
+                form.reset();
+                // Scroll to success message
+                statusDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                submitBtn.innerHTML = 'Application Received <i class="fa-solid fa-check"></i>';
+                // Optionally re-enable after a delay
+                setTimeout(() => {
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = 'Submit Application <i class="fa-solid fa-arrow-right-long"></i>';
+                }, 5000);
+            } else {
+                const errorData = await response.json();
+                statusDiv.innerHTML = '<div class="alert alert-error"><i class="fa-solid fa-circle-exclamation"></i> ⚠️ There was an error submitting your form. Please try again or contact us directly.</div>';
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = 'Submit Application <i class="fa-solid fa-arrow-right-long"></i>';
+            }
+        } catch (error) {
+            statusDiv.innerHTML = '<div class="alert alert-error"><i class="fa-solid fa-circle-exclamation"></i> ⚠️ Network error. Please check your connection and try again.</div>';
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = 'Submit Application <i class="fa-solid fa-arrow-right-long"></i>';
+        }
+    });
+</script>
+</body>
+</html>

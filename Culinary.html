@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Culinary Arts | Orovie Hospitality Institute</title>
+    <link rel="icon" type="image/x-icon" href="logo.png">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <style>
+        :root {
+            --accent: #b8926a; 
+            --accent-dark: #9b6e48;
+            --bg: #fdfcfb;     
+            --ink: #1a1a1a;    
+            --muted: #7a7a7a;
+            --white: #ffffff;
+            --light-beige: #faf8f5;
+            --transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Montserrat', sans-serif; 
+            background-color: var(--bg); 
+            color: var(--ink);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, .logo { font-family: 'Cormorant Garamond', serif; font-weight: 300; }
+
+        /* --- NAVIGATION (same as home) --- */
+        nav {
+            position: fixed;
+            top: 0; width: 100%;
+            padding: 40px 5%;
+            display: flex; justify-content: space-between; align-items: center;
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        nav.scrolled {
+            padding: 20px 5%;
+            background: rgba(253, 252, 251, 0.98);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .logo { font-size: 1.5rem; letter-spacing: 2px; text-decoration: none; color: var(--ink); flex: 1; font-weight: 500; }
+
+        .nav-links { display: flex; gap: 40px; list-style: none; align-items: center; }
+        .nav-links a {
+            text-decoration: none;
+            color: var(--ink);
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: var(--transition);
+        }
+        .nav-links a:hover, .nav-links a.active { color: var(--accent); }
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        /* dropdown */
+        .nav-links li {
+            position: relative;
+            display: inline-block;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #ffffff;
+            min-width: 220px;
+            box-shadow: 0px 8px 16px rgba(0,0,0,0.1);
+            z-index: 1;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            border-radius: 4px;
+            top: 100%;
+            left: 0;
+        }
+        .dropdown-content li a {
+            color: #333;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            transition: background 0.3s;
+            font-size: 0.7rem;
+            letter-spacing: 1px;
+        }
+        .dropdown-content li a:hover {
+            background-color: #f1f1f1;
+            color: var(--accent);
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        .dropbtn i {
+            font-size: 12px;
+            margin-left: 5px;
+        }
+
+        /* Hero section */
+        .hero-culinary {
+            min-height: 65vh;
+            padding: 180px 5% 100px;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.3)), url('https://i.pinimg.com/736x/9e/be/12/9ebe12b03d0a5b025b09d93e6339ae6d.jpg') center/cover fixed;
+            display: flex;
+            align-items: flex-end;
+            color: white;
+        }
+        .hero-culinary .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        .hero-culinary h1 {
+            font-size: clamp(3rem, 8vw, 5.5rem);
+            line-height: 1.1;
+            font-weight: 500;
+        }
+        .hero-culinary p {
+            font-size: 1.1rem;
+            max-width: 650px;
+            margin-top: 20px;
+            opacity: 0.9;
+        }
+
+        /* Section styles */
+        .section-padding {
+            padding: 100px 5%;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.5rem, 4vw, 3.8rem);
+            line-height: 1.2;
+            margin-bottom: 20px;
+            color: var(--ink);
+        }
+        .section-sub {
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        /* Curriculum Grid */
+        .curriculum-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        .course-card {
+            background: var(--white);
+            padding: 28px;
+            border-radius: 12px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.03);
+            transition: var(--transition);
+            border: 1px solid rgba(184,146,106,0.15);
+        }
+        .course-card:hover {
+            transform: translateY(-6px);
+            border-color: var(--accent);
+            box-shadow: 0 25px 40px rgba(0,0,0,0.05);
+        }
+        .course-code {
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            color: var(--accent);
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+        .course-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+        .course-desc {
+            font-size: 0.85rem;
+            color: var(--muted);
+            line-height: 1.5;
+        }
+
+        /* Requirements double column */
+        .two-col-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: start;
+        }
+        .requirement-list {
+            list-style: none;
+        }
+        .requirement-list li {
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            font-size: 0.95rem;
+        }
+        .requirement-list i {
+            color: var(--accent);
+            width: 22px;
+            font-size: 1rem;
+        }
+        .info-card {
+            background: var(--light-beige);
+            padding: 40px;
+            border-radius: 24px;
+        }
+        .info-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+        .badge-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin: 25px 0;
+        }
+        .badge {
+            background: white;
+            padding: 8px 20px;
+            border-radius: 40px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--ink);
+            border: 1px solid var(--accent);
+        }
+
+        /* pathway note */
+        .practical-note {
+            background: var(--ink);
+            color: white;
+            padding: 60px 5%;
+            text-align: center;
+        }
+        .practical-note .container {
+            max-width: 800px;
+        }
+        .btn-luxury {
+            display: inline-block;
+            padding: 18px 40px;
+            border: 1px solid var(--ink);
+            color: var(--ink);
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+        .btn-luxury.dark {
+            background: var(--ink);
+            color: var(--white);
+            border: none;
+        }
+        .btn-luxury.dark:hover {
+            background: var(--accent);
+        }
+        footer {
+            background: #f4f1ee;
+            text-align: center;
+            padding: 50px 5%;
+            border-top: 1px solid rgba(0,0,0,0.05);
+        }
+
+        @media (max-width: 992px) {
+            nav { padding: 20px 5%; background: var(--bg); }
+            .menu-toggle { display: block; }
+            .nav-links {
+                position: fixed;
+                top: 0; right: -100%;
+                height: 100vh; width: 80%;
+                background: var(--white);
+                flex-direction: column;
+                justify-content: center;
+                transition: 0.5s ease-in-out;
+                box-shadow: -10px 0 30px rgba(0,0,0,0.05);
+                gap: 30px;
+            }
+            .nav-links.active { right: 0; }
+            .two-col-layout { grid-template-columns: 1fr; gap: 40px; }
+            .hero-culinary { background-attachment: scroll; }
+        }
+        @media (max-width: 600px) {
+            .section-padding { padding: 60px 5%; }
+            .curriculum-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+<nav id="navbar">
+    <a href="index.html" class="logo">Orovie Hospitality Institute</a>
+    <ul class="nav-links" id="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="About.html">About</a></li>
+        <li class="dropdown">
+            <a href="Courses.html" class="dropbtn">Courses <i class="fa-solid fa-caret-down"></i></a>
+            <ul class="dropdown-content">
+                <li><a href="Culinary.html">Culinary Arts</a></li>
+                <li><a href="Baking.html">Baking & Pastry Arts</a></li>
+                <li><a href="Bartending.html">Bartending & Mixology</a></li>
+                <li><a href="Hotel.html">Hotel Administration</a></li>
+                <li><a href="Protocol.html">Protocol & Etiquette</a></li>
+                <li><a href="Events.html">Events Management</a></li>
+                <li><a href="Tourism.html">Tourism Management</a></li>
+                <li><a href="CulinaryManagement.html">Culinary & Food Service MNGT</a></li>
+                <li><a href="Brand_Management.html">Brand Management</a></li>
+            </ul>
+        </li>
+        <li><a href="Mission.html">Mission</a></li>
+        <li><a href="Apply.html">Apply Today</a></li>
+        <li><a href="Contact.html">Contact</a></li>
+    </ul>
+    <div class="menu-toggle" id="mobile-menu">
+        <i class="fa-solid fa-bars"></i>
+    </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero-culinary">
+    <div class="container">
+        <h1 data-aos="fade-up">Culinary Arts<br><span style="font-style: italic;">& Gastronomy</span></h1>
+        <p data-aos="fade-up" data-aos-delay="150">Master the science of flavor, artistry of presentation, and operational excellence in professional kitchens. From classical foundations to contemporary global cuisine.</p>
+    </div>
+</section>
+
+<!-- Courses / Curriculum Section (based on data from Catering Management + Food Production) -->
+<section class="section-padding">
+    <div class="container">
+        <span class="section-sub" data-aos="fade-up">Programme Structure</span>
+        <h2 class="section-title" data-aos="fade-up" data-aos-delay="50">Comprehensive Culinary Curriculum</h2>
+        <p data-aos="fade-up" data-aos-delay="100">Our Culinary Arts program integrates theoretical knowledge with intensive hands-on training. Students develop mastery in food science, production techniques, nutrition, hygiene, and management — all essential for a thriving career in the global hospitality industry.</p>
+        
+        <div class="curriculum-grid" data-aos="fade-up" data-aos-delay="200">
+            <!-- All courses extracted from Catering Management list + added practical baking/food theory -->
+            <div class="course-card"><div class="course-code">CM111</div><div class="course-title">Introduction to Catering & Home Economics</div><div class="course-desc">Foundational principles of catering operations, domestic science, and hospitality economics.</div></div>
+            <div class="course-card"><div class="course-code">CM112</div><div class="course-title">Computer Science</div><div class="course-desc">Digital literacy, inventory software, and technological tools for modern kitchen management.</div></div>
+            <div class="course-card"><div class="course-code">CM113</div><div class="course-title">Use of English – Library & Study Skills</div><div class="course-desc">Academic writing, research methodologies, and professional communication in culinary context.</div></div>
+            <div class="course-card"><div class="course-code">CM114</div><div class="course-title">Food Science & Technology</div><div class="course-desc">Chemical and physical properties of ingredients, food preservation, and innovation in gastronomy.</div></div>
+            <div class="course-card"><div class="course-code">CM115</div><div class="course-title">Nutrition & Dietetics</div><div class="course-desc">Diet planning, therapeutic nutrition, and wellness principles for diverse client needs.</div></div>
+            <div class="course-card"><div class="course-code">CM116</div><div class="course-title">Food Production Theory & Practice</div><div class="course-desc">Culinary techniques: stocks, sauces, butchery, vegetable cookery, and bulk production.</div></div>
+            <div class="course-card"><div class="course-code">CM117</div><div class="course-title">Food Security</div><div class="course-desc">Global food systems, sustainability, and ethical sourcing in hospitality.</div></div>
+            <div class="course-card"><div class="course-code">CM118</div><div class="course-title">Food Precaution & Management</div><div class="course-desc">Risk assessment, cross-contamination prevention, and safety protocols.</div></div>
+            <div class="course-card"><div class="course-code">CM119</div><div class="course-title">Quality Food Production & Services</div><div class="course-desc">Consistency, plating excellence, and service standards in high-volume environments.</div></div>
+            <div class="course-card"><div class="course-code">CM120</div><div class="course-title">Restaurant Operation Management</div><div class="course-desc">Front/back of house coordination, cost control, and guest experience optimization.</div></div>
+            <div class="course-card"><div class="course-code">CM121</div><div class="course-title">Catering Hygiene & Safety</div><div class="course-desc">HACCP principles, sanitation regulations, and workplace safety culture.</div></div>
+            <div class="course-card"><div class="course-code">CM122</div><div class="course-title">Catering Equipment & System</div><div class="course-desc">Kitchen machinery, maintenance, workflow design, and energy efficiency.</div></div>
+            <div class="course-card"><div class="course-code">CM123</div><div class="course-title">Food Science Theory & Practice (Advanced)</div><div class="course-desc">Deep dive into molecular gastronomy, fermentation, and sensory analysis.</div></div>
+            <div class="course-card"><div class="course-code">CM124</div><div class="course-title">Practical in Catering</div><div class="course-desc">Intensive lab: full-course preparation, live buffets, and event catering simulations.</div></div>
+            <!-- Additional culinary arts specific: from managing management and baking/pastry context -->
+            <div class="course-card"><div class="course-code">CUL220</div><div class="course-title">Managing Management in Catering Business</div><div class="course-desc">Licensing, kitchen planning, pricing strategies, party planning and crowd cooking logistics.</div></div>
+            <div class="course-card"><div class="course-code">CUL225</div><div class="course-title">Baking & Pastry Arts Fundamentals</div><div class="course-desc">Bread, laminated dough, desserts, cost control, and presentation techniques.</div></div>
+        </div>
+    </div>
+</section>
+
+<!-- Requirements + Additional Info -->
+<section class="section-padding" style="background: var(--light-beige);">
+    <div class="container two-col-layout">
+        <div data-aos="fade-right">
+            <span class="section-sub">Essential Toolkit</span>
+            <h2 class="section-title" style="margin-bottom: 30px;">Requirements & Materials</h2>
+            <ul class="requirement-list">
+                <li><i class="fa-solid fa-kitchen-set"></i> Professional chef’s knife set (8" chef, paring, serrated)</li>
+                <li><i class="fa-solid fa-vest"></i> Full chef uniform: jacket, check pants, apron, neckerchief</li>
+                <li><i class="fa-solid fa-thermometer-half"></i> Digital probe thermometer & timer</li>
+                <li><i class="fa-solid fa-book"></i> Culinary journal / recipe development notebook</li>
+                <li><i class="fa-solid fa-hand-peace"></i> Cut-resistant gloves & non-slip clogs</li>
+                <li><i class="fa-solid fa-blender"></i> Mandoline, microplane, piping bags (for advanced modules)</li>
+                <li><i class="fa-solid fa-dumbbell"></i> Personal mise en place kit (small containers, markers)</li>
+                <li><i class="fa-solid fa-wine-bottle"></i> Pairing essentials for gastronomy modules</li>
+            </ul>
+            <div class="badge-list">
+                <span class="badge">Knife skills kit included</span>
+                <span class="badge">Safety gear mandatory</span>
+                <span class="badge">Uniform provided by institute</span>
+            </div>
+        </div>
+        <div data-aos="fade-left">
+            <div class="info-card">
+                <i class="fa-solid fa-champagne-glasses" style="font-size: 2rem; color: var(--accent); margin-bottom: 15px; display: inline-block;"></i>
+                <h3>Program Highlights</h3>
+                <p><strong>Duration:</strong> 12 months intensive (Certificate) | 24 months Diploma pathway.<br>
+                <strong>Hands-on ratio:</strong> 70% practical kitchen training, 30% theory.<br>
+                <strong>Industry exposure:</strong> Mandatory externship in partner hotels & restaurants.<br>
+                <strong>Class size:</strong> Limited to 16 students per session for personalised mentorship.</p>
+                <hr style="margin: 25px 0; border-color: rgba(0,0,0,0.05);">
+                <h3 style="font-size: 1.4rem;">Learning Outcomes</h3>
+                <ul style="list-style: none; margin-top: 15px;">
+                    <li style="margin-bottom: 10px;">✓ Master classic and contemporary cooking techniques</li>
+                    <li style="margin-bottom: 10px;">✓ Implement food safety and HACCP systems</li>
+                    <li style="margin-bottom: 10px;">✓ Design nutritionally balanced menus for diverse diets</li>
+                    <li style="margin-bottom: 10px;">✓ Manage kitchen operations, costing, and procurement</li>
+                    <li>✓ Lead culinary teams with professionalism and creativity</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Practical Experience + Philosophy Section from original docs -->
+<section class="section-padding">
+    <div class="container two-col-layout" style="gap: 50px;">
+        <div data-aos="fade-up">
+            <img src="https://i.pinimg.com/736x/41/8c/4b/418c4b342d479e751705b2304fca1e66.jpg" alt="Practical training" style="width: 100%; border-radius: 28px; box-shadow: 0 20px 35px rgba(0,0,0,0.05);">
+        </div>
+        <div data-aos="fade-up" data-aos-delay="150">
+            <span class="section-sub">Beyond the classroom</span>
+            <h2 class="section-title">Direct Practical Experience</h2>
+            <p style="margin-bottom: 20px;">As emphasised in our institutional philosophy: <strong>"A vital aspect of these programs is the opportunity provided for students to gain direct practical experience during the period."</strong> Our students train in our industrial-grade demo kitchens, participate in live service events, and complete internships at premium establishments. </p>
+            <p>You will graduate with a professional portfolio, industry network, and the confidence to excel in competitive culinary environments — from luxury hotels to fine dining restaurants, cruise lines, or your own catering venture.</p>
+            <div style="margin-top: 35px;">
+                <a href="Apply.html" class="btn-luxury dark">Enroll in Culinary Arts →</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Dignity in labour & ethics (from original mission objectives) -->
+<section class="practical-note">
+    <div class="container" data-aos="zoom-in">
+        <i class="fa-solid fa-hands-praying" style="font-size: 3rem; color: var(--accent); margin-bottom: 20px; display: inline-block;"></i>
+        <h2 style="font-family: 'Cormorant Garamond'; font-size: 2.5rem; margin-bottom: 20px;">"Dignity in Labour"</h2>
+        <p style="max-width: 700px; margin: 0 auto; opacity: 0.85;">We inculcate into our students that there is dignity in labour through ample exposure and involvement in practical hands-on skills. Our culinary arts program nurtures not only technical mastery but also a profound work ethic, integrity, and respect for ingredients, colleagues, and guests.</p>
+    </div>
+</section>
+
+<!-- Additional career pathways -->
+<section class="section-padding">
+    <div class="container" style="text-align: center;">
+        <span class="section-sub">Global Career Pathways</span>
+        <h2 class="section-title">Where Our Culinary Graduates Thrive</h2>
+        <div class="badge-list" style="justify-content: center; margin: 40px 0;">
+            <span class="badge">Executive Chef</span>
+            <span class="badge">Sous Chef</span>
+            <span class="badge">Pastry Chef</span>
+            <span class="badge">Catering Manager</span>
+            <span class="badge">Food Stylist</span>
+            <span class="badge">R&D Chef</span>
+            <span class="badge">Private Chef</span>
+            <span class="badge">Culinary Instructor</span>
+        </div>
+        <p style="max-width: 800px; margin: 0 auto;">Orovie Hospitality Institute partners with leading hotels, resorts, and culinary brands to offer placement assistance and career mentorship. Our alumni network spans Lagos, London, Dubai, and beyond.</p>
+    </div>
+</section>
+
+<footer>
+    <p style="color: #5a5a5a; font-size: 0.85rem;">&copy; 2025 Orovie Hospitality Institute. Excellence Refined. — Culinary Arts Programme</p>
+</footer>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    AOS.init({ duration: 1000, once: true });
+    window.addEventListener('scroll', () => {
+        const nav = document.getElementById('navbar');
+        if (window.scrollY > 80) nav.classList.add('scrolled');
+        else nav.classList.remove('scrolled');
+    });
+    const mobileMenu = document.getElementById('mobile-menu');
+    const navLinks = document.getElementById('nav-links');
+    mobileMenu.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+        const icon = mobileMenu.querySelector('i');
+        icon.classList.toggle('fa-bars');
+        icon.classList.toggle('fa-times');
+    });
+    document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', () => {
+            navLinks.classList.remove('active');
+            const icon = mobileMenu.querySelector('i');
+            if(icon) { icon.classList.add('fa-bars'); icon.classList.remove('fa-times'); }
+        });
+    });
+</script>
+</body>
+</html>

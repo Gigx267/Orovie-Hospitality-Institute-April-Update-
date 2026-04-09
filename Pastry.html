@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Baking & Pastry Arts | Orovie Hospitality Institute</title>
+    <link rel="icon" type="image/x-icon" href="logo.png">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <style>
+        :root {
+            --accent: #b8926a; 
+            --accent-dark: #9b6e48;
+            --bg: #fdfcfb;     
+            --ink: #1a1a1a;    
+            --muted: #7a7a7a;
+            --white: #ffffff;
+            --light-beige: #faf8f5;
+            --transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Montserrat', sans-serif; 
+            background-color: var(--bg); 
+            color: var(--ink);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, .logo { font-family: 'Cormorant Garamond', serif; font-weight: 300; }
+
+        /* --- NAVIGATION (identical to main site) --- */
+        nav {
+            position: fixed;
+            top: 0; width: 100%;
+            padding: 40px 5%;
+            display: flex; justify-content: space-between; align-items: center;
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        nav.scrolled {
+            padding: 20px 5%;
+            background: rgba(253, 252, 251, 0.98);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .logo { font-size: 1.5rem; letter-spacing: 2px; text-decoration: none; color: var(--ink); flex: 1; font-weight: 500; }
+
+        .nav-links { display: flex; gap: 40px; list-style: none; align-items: center; }
+        .nav-links a {
+            text-decoration: none;
+            color: var(--ink);
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: var(--transition);
+        }
+        .nav-links a:hover, .nav-links a.active { color: var(--accent); }
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        /* dropdown */
+        .nav-links li {
+            position: relative;
+            display: inline-block;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #ffffff;
+            min-width: 220px;
+            box-shadow: 0px 8px 16px rgba(0,0,0,0.1);
+            z-index: 1;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            border-radius: 4px;
+            top: 100%;
+            left: 0;
+        }
+        .dropdown-content li a {
+            color: #333;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            transition: background 0.3s;
+            font-size: 0.7rem;
+            letter-spacing: 1px;
+        }
+        .dropdown-content li a:hover {
+            background-color: #f1f1f1;
+            color: var(--accent);
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        .dropbtn i {
+            font-size: 12px;
+            margin-left: 5px;
+        }
+
+        /* Hero */
+        .hero-baking {
+            min-height: 65vh;
+            padding: 180px 5% 100px;
+            background: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.4)), url('https://i.pinimg.com/1200x/65/8c/cf/658ccf1fa1ae8a23654a1c722b60ffdb.jpg') center/cover fixed;
+            display: flex;
+            align-items: flex-end;
+            color: white;
+        }
+        .hero-baking .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        .hero-baking h1 {
+            font-size: clamp(3rem, 8vw, 5.5rem);
+            line-height: 1.1;
+            font-weight: 500;
+        }
+        .hero-baking p {
+            font-size: 1.1rem;
+            max-width: 650px;
+            margin-top: 20px;
+            opacity: 0.9;
+        }
+
+        /* Section utilities */
+        .section-padding {
+            padding: 100px 5%;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.5rem, 4vw, 3.8rem);
+            line-height: 1.2;
+            margin-bottom: 20px;
+            color: var(--ink);
+        }
+        .section-sub {
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        /* Curriculum Grid */
+        .curriculum-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        .course-card {
+            background: var(--white);
+            padding: 28px;
+            border-radius: 12px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.03);
+            transition: var(--transition);
+            border: 1px solid rgba(184,146,106,0.15);
+        }
+        .course-card:hover {
+            transform: translateY(-6px);
+            border-color: var(--accent);
+            box-shadow: 0 25px 40px rgba(0,0,0,0.05);
+        }
+        .course-code {
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            color: var(--accent);
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+        .course-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+        .course-desc {
+            font-size: 0.85rem;
+            color: var(--muted);
+            line-height: 1.5;
+        }
+
+        /* two column for requirements */
+        .two-col-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: start;
+        }
+        .requirement-list {
+            list-style: none;
+        }
+        .requirement-list li {
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            font-size: 0.95rem;
+        }
+        .requirement-list i {
+            color: var(--accent);
+            width: 22px;
+            font-size: 1rem;
+        }
+        .info-card {
+            background: var(--light-beige);
+            padding: 40px;
+            border-radius: 24px;
+        }
+        .info-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+        .badge-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin: 25px 0;
+        }
+        .badge {
+            background: white;
+            padding: 8px 20px;
+            border-radius: 40px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--ink);
+            border: 1px solid var(--accent);
+        }
+
+        .btn-luxury {
+            display: inline-block;
+            padding: 18px 40px;
+            border: 1px solid var(--ink);
+            color: var(--ink);
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+        .btn-luxury.dark {
+            background: var(--ink);
+            color: var(--white);
+            border: none;
+        }
+        .btn-luxury.dark:hover {
+            background: var(--accent);
+        }
+        footer {
+            background: #f4f1ee;
+            text-align: center;
+            padding: 50px 5%;
+            border-top: 1px solid rgba(0,0,0,0.05);
+        }
+
+        @media (max-width: 992px) {
+            nav { padding: 20px 5%; background: var(--bg); }
+            .menu-toggle { display: block; }
+            .nav-links {
+                position: fixed;
+                top: 0; right: -100%;
+                height: 100vh; width: 80%;
+                background: var(--white);
+                flex-direction: column;
+                justify-content: center;
+                transition: 0.5s ease-in-out;
+                box-shadow: -10px 0 30px rgba(0,0,0,0.05);
+                gap: 30px;
+            }
+            .nav-links.active { right: 0; }
+            .two-col-layout { grid-template-columns: 1fr; gap: 40px; }
+            .hero-baking { background-attachment: scroll; }
+        }
+        @media (max-width: 600px) {
+            .section-padding { padding: 60px 5%; }
+            .curriculum-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+<nav id="navbar">
+    <a href="index.html" class="logo">Orovie Hospitality Institute</a>
+    <ul class="nav-links" id="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="About.html">About</a></li>
+        <li class="dropdown">
+            <a href="Courses.html" class="dropbtn">Courses <i class="fa-solid fa-caret-down"></i></a>
+            <ul class="dropdown-content">
+                <li><a href="Culinary.html">Culinary Arts</a></li>
+                <li><a href="Baking.html">Baking & Pastry Arts</a></li>
+                <li><a href="Bartending.html">Bartending & Mixology</a></li>
+                <li><a href="Hotel.html">Hotel Administration</a></li>
+                <li><a href="Protocol.html">Protocol & Etiquette</a></li>
+                <li><a href="Events.html">Events Management</a></li>
+                <li><a href="Tourism.html">Tourism Management</a></li>
+                <li><a href="CulinaryManagement.html">Culinary & Food Service MNGT</a></li>
+                <li><a href="Brand_Management.html">Brand Management</a></li>
+            </ul>
+        </li>
+        <li><a href="Mission.html">Mission</a></li>
+        <li><a href="Apply.html">Apply Today</a></li>
+        <li><a href="Contact.html">Contact</a></li>
+    </ul>
+    <div class="menu-toggle" id="mobile-menu">
+        <i class="fa-solid fa-bars"></i>
+    </div>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero-baking">
+    <div class="container">
+        <h1 data-aos="fade-up">Baking & <br>Pastry Arts</h1>
+        <p data-aos="fade-up" data-aos-delay="150">Develop professionalism and proficiency in preparation procedures, production methods, and presentation techniques for pastry, baked goods, and desserts — combined with cost control and food safety excellence.</p>
+    </div>
+</section>
+
+<!-- Curriculum (Based on provided Cake Craft and Decoration + Baking & Pastry Arts details) -->
+<section class="section-padding">
+    <div class="container">
+        <span class="section-sub" data-aos="fade-up">Master the Art of Sugar & Dough</span>
+        <h2 class="section-title" data-aos="fade-up" data-aos-delay="50">Comprehensive Pastry Curriculum</h2>
+        <p data-aos="fade-up" data-aos-delay="100">Our programme covers everything from fundamental baking science to advanced sugar craft, wedding cakes, and decorative showpieces. Each module blends theory with extensive hands-on practice, ensuring you graduate with industry-ready expertise.</p>
+        
+        <div class="curriculum-grid" data-aos="fade-up" data-aos-delay="200">
+            <!-- Courses from Cake Craft and Decoration curriculum + Baking and Pastry arts from general doc -->
+            <div class="course-card"><div class="course-code">CCT111</div><div class="course-title">Getting Started</div><div class="course-desc">Introduction to baking principles, kitchen safety, and professional mindset.</div></div>
+            <div class="course-card"><div class="course-code">CCT111</div><div class="course-title">Cake Decorating Tools & Work Space</div><div class="course-desc">Equipment identification, workspace organisation, and tool maintenance.</div></div>
+            <div class="course-card"><div class="course-code">CCT111</div><div class="course-title">Planning & Designing Your Cake</div><div class="course-desc">Sketching, structural calculations, and theme conceptualization.</div></div>
+            <div class="course-card"><div class="course-code">CCT112</div><div class="course-title">The 411 on Cake Baking Basics</div><div class="course-desc">Ingredient functions, mixing methods, and troubleshooting common faults.</div></div>
+            <div class="course-card"><div class="course-code">CCT112</div><div class="course-title">Basic Cake Decorating Recipes</div><div class="course-desc">Buttercreams, ganaches, glazes, and syrups for finishing.</div></div>
+            <div class="course-card"><div class="course-code">CCT112</div><div class="course-title">Icing, Glaze & Filling Choices</div><div class="course-desc">Texture, flavour pairings, and application techniques.</div></div>
+            <div class="course-card"><div class="course-code">CCP113</div><div class="course-title">Decorating with Butter Cream Icing</div><div class="course-desc">Smooth finishes, ruffles, rosettes, and colour blending.</div></div>
+            <div class="course-card"><div class="course-code">CCP113</div><div class="course-title">Decorating with Royal Icing</div><div class="course-desc">Piped flowers, flooding, and intricate detailing for celebration cakes.</div></div>
+            <div class="course-card"><div class="course-code">CCP113</div><div class="course-title">Decorating with Fondant Icing</div><div class="course-desc">Covering, draping, embossing, and modelling figures.</div></div>
+            <div class="course-card"><div class="course-code">CCP114</div><div class="course-title">The Scary Piping Bag</div><div class="course-desc">Mastering pressure control, tip selection, and advanced borders.</div></div>
+            <div class="course-card"><div class="course-code">CCP115</div><div class="course-title">Sugar Flowers & Gum Paste Creations</div><div class="course-desc">Botanical realism: roses, peonies, leaves, and wired sugar art.</div></div>
+            <div class="course-card"><div class="course-code">CCP115</div><div class="course-title">Fruits, Flowers, Fun & Fancy</div><div class="course-desc">Contemporary toppers, geometric designs, and novelty accents.</div></div>
+            <div class="course-card"><div class="course-code">CCP116</div><div class="course-title">Wedding Cakes</div><div class="course-desc">Tiered structures, support systems, elegant finishes and delivery.</div></div>
+            <div class="course-card"><div class="course-code">CCP116</div><div class="course-title">Decorative Children's Cakes</div><div class="course-desc">Bright themes, sculpted shapes, and fondant characters.</div></div>
+            <div class="course-card"><div class="course-code">CCP116</div><div class="course-title">Holiday & Celebration Cakes</div><div class="course-desc">Seasonal inspirations: Christmas, Easter, anniversary designs.</div></div>
+            <div class="course-card"><div class="course-code">CCP116</div><div class="course-title">Cool Theme Cakes</div><div class="course-desc">Pop culture, sports, and luxury brand inspired creations.</div></div>
+            <div class="course-card"><div class="course-code">CCP116</div><div class="course-title">Beloved Cupcakes</div><div class="course-desc">Miniature art: swirl techniques, fillings, and packaging.</div></div>
+            <div class="course-card"><div class="course-code">CP117</div><div class="course-title">Express Your Creativity</div><div class="course-desc">Final signature project: original cake design and execution.</div></div>
+            <div class="course-card"><div class="course-code">BPA201</div><div class="course-title">Baking Science & Technology</div><div class="course-desc">Chemistry of leavening, gluten development, and bakery math.</div></div>
+            <div class="course-card"><div class="course-code">BPA202</div><div class="course-title">Artisan Breads & Viennoiserie</div><div class="course-desc">Sourdough, croissants, danishes, and laminated dough mastery.</div></div>
+        </div>
+    </div>
+</section>
+
+<!-- Requirements & Tools (Based on provided "Requirement for Cake Decorating" list) -->
+<section class="section-padding" style="background: var(--light-beige);">
+    <div class="container two-col-layout">
+        <div data-aos="fade-right">
+            <span class="section-sub">Essential Kit & Ingredients</span>
+            <h2 class="section-title" style="margin-bottom: 30px;">Baking & Decorating Requirements</h2>
+            <ul class="requirement-list">
+                <li><i class="fa-solid fa-palette"></i> Plastic airtight bowls for icing storage</li>
+                <li><i class="fa-solid fa-shirt"></i> Apron & professional chef jacket</li>
+                <li><i class="fa-solid fa-tooth"></i> Toothpick set & small detailing tools</li>
+                <li><i class="fa-solid fa-scissors"></i> Scissors (straight & micro-tip)</li>
+                <li><i class="fa-solid fa-paper-plane"></i> Wax paper / parchment rounds</li>
+                <li><i class="fa-solid fa-bag-shopping"></i> Piping bags (disposable & reusable)</li>
+                <li><i class="fa-solid fa-fill-drip"></i> Icing colors: paste (Wilton/Sugarflair) green, yellow, red, black etc.</li>
+                <li><i class="fa-solid fa-star-of-life"></i> Icing nozzles/tips: #3, #21/32, #352/67, #104/103, #12, #47/48, #5, #16/18, #224/225, #2D</li>
+                <li><i class="fa-solid fa-utensil-spoon"></i> Spatulas: one large, one small offset</li>
+                <li><i class="fa-solid fa-crown"></i> Clown heads / decorative toppers & moulds</li>
+                <li><i class="fa-solid fa-cube"></i> 6" dummy cake for practice tiers</li>
+                <li><i class="fa-solid fa-grip"></i> Cake comb & decorating turn table</li>
+                <li><i class="fa-solid fa-hand-sparkles"></i> Fondant smoothers & rolling pins (smooth + embossed)</li>
+                <li><i class="fa-solid fa-flask"></i> Glycerin, glucose syrup, gelatin, vegetable shortening</li>
+                <li><i class="fa-solid fa-leaf"></i> Blossom cutters, brandy extract, and edible lustre dusts</li>
+            </ul>
+            <div class="badge-list">
+                <span class="badge">Starter toolkit available</span>
+                <span class="badge">Premium nozzles recommended</span>
+                <span class="badge">Fondant practice kit included</span>
+            </div>
+        </div>
+        <div data-aos="fade-left">
+            <div class="info-card">
+                <i class="fa-solid fa-cake-candles" style="font-size: 2rem; color: var(--accent); margin-bottom: 15px; display: inline-block;"></i>
+                <h3>Program Highlights</h3>
+                <p><strong>Duration:</strong> 6 months intensive Certificate | 12 months Advanced Diploma<br>
+                <strong>Focus:</strong> 75% hands-on workshop + 25% theory & design<br>
+                <strong>Workshop categories:</strong> Cakes, Cupcakes, Cake Jewellery, Cake Toppers, Wedding Cakes, Mini Christmas Cakes, Football Club & Professional Cakes.<br>
+                <strong>Class size:</strong> Max 12 students for personalized mentorship.</p>
+                <hr style="margin: 25px 0; border-color: rgba(0,0,0,0.05);">
+                <h3 style="font-size: 1.4rem;">What You'll Master</h3>
+                <ul style="list-style: none; margin-top: 15px;">
+                    <li style="margin-bottom: 10px;">✓ Piping, fondant icing, and royal icing techniques</li>
+                    <li style="margin-bottom: 10px;">✓ Sugar flower sculpting and gum paste artistry</li>
+                    <li style="margin-bottom: 10px;">✓ Wedding cake structural engineering & stacking</li>
+                    <li style="margin-bottom: 10px;">✓ Chocolate work, modelling paste, and airbrushing</li>
+                    <li style="margin-bottom: 10px;">✓ Pricing, cost control, and client consultation</li>
+                    <li>✓ Food safety and allergen management in pastry</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Workshop Philosophy & Unique Approach -->
+<section class="section-padding">
+    <div class="container two-col-layout" style="gap: 50px;">
+        <div data-aos="fade-up">
+            <img src="https://i.pinimg.com/1200x/1b/4c/1c/1b4c1c1798ab3aa5e23ee80b0b5af64c.jpg" alt="Cake decorating workshop" style="width: 100%; border-radius: 28px; box-shadow: 0 20px 35px rgba(0,0,0,0.05);">
+        </div>
+        <div data-aos="fade-up" data-aos-delay="150">
+            <span class="section-sub">Our Signature Approach</span>
+            <h2 class="section-title">From Beginner to Sugar Artist</h2>
+            <p style="margin-bottom: 20px;">We offer a unique workshop programme that covers all aspects of Cake Craft and Decoration — from basic sugarcraft classes where you can learn how to ice a cake successfully, to the advanced and hugely popular themed cakes. Our workshop categories focus on Cakes, Cupcakes, Cake Jewellery and Cake Toppers. Themes include 'Football Club Cakes', 'Professional Cakes', and 'Mini Christmas Cakes'.</p>
+            <p>Because our classes are suitable for the beginner through to the advanced sugar crafter, there is sure to be a course to suit you. We choose themes very carefully to inspire creativity and professionalism.</p>
+            <div style="margin-top: 35px;">
+                <a href="Apply.html" class="btn-luxury dark">Reserve Your Spot →</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Ethical & Professional Standards Section (from institute's original documents) -->
+<section class="practical-note" style="background: var(--ink); color: white;">
+    <div class="container" data-aos="zoom-in">
+        <i class="fa-solid fa-seedling" style="font-size: 3rem; color: var(--accent); margin-bottom: 20px; display: inline-block;"></i>
+        <h2 style="font-family: 'Cormorant Garamond'; font-size: 2.5rem; margin-bottom: 20px;">Artistry meets Professionalism</h2>
+        <p style="max-width: 750px; margin: 0 auto; opacity: 0.85;">"We value quality and our reputation for maintaining exacting and high standards. We continuously emphasise the importance of positive work values and ethics, not only through theoretical training, but also through practical training." — Orovie Hospitality Institute.</p>
+        <p style="margin-top: 20px;">Graduates of Baking & Pastry Arts leave with a portfolio of celebration cakes, showpieces, and the business acumen to launch their own patisserie or work in top hotels.</p>
+    </div>
+</section>
+
+<!-- Career Outcomes -->
+<section class="section-padding">
+    <div class="container" style="text-align: center;">
+        <span class="section-sub">Professional Destinations</span>
+        <h2 class="section-title">Where Pastry Graduates Shine</h2>
+        <div class="badge-list" style="justify-content: center; margin: 40px 0;">
+            <span class="badge">Executive Pastry Chef</span>
+            <span class="badge">Cake Designer</span>
+            <span class="badge">Chocolatier</span>
+            <span class="badge">Bakery Owner</span>
+            <span class="badge">Wedding Cake Specialist</span>
+            <span class="badge">Sugar Art Instructor</span>
+            <span class="badge">R&D Pastry Chef</span>
+            <span class="badge">Cruise Ship Pastry Chef</span>
+        </div>
+        <p style="max-width: 800px; margin: 0 auto;">Through our industry partnerships and career placement support, graduates have secured roles in luxury hotels, boutique bakeries, international cruise lines, and as successful entrepreneurs. The global demand for skilled pastry artists continues to rise, and Orovie prepares you to lead the craft.</p>
+    </div>
+</section>
+
+<footer>
+    <p style="color: #5a5a5a; font-size: 0.85rem;">&copy; 2025 Orovie Hospitality Institute. Excellence Refined. — Baking & Pastry Arts Programme</p>
+</footer>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    AOS.init({ duration: 1000, once: true });
+    window.addEventListener('scroll', () => {
+        const nav = document.getElementById('navbar');
+        if (window.scrollY > 80) nav.classList.add('scrolled');
+        else nav.classList.remove('scrolled');
+    });
+    const mobileMenu = document.getElementById('mobile-menu');
+    const navLinks = document.getElementById('nav-links');
+    mobileMenu.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+        const icon = mobileMenu.querySelector('i');
+        icon.classList.toggle('fa-bars');
+        icon.classList.toggle('fa-times');
+    });
+    document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', () => {
+            navLinks.classList.remove('active');
+            const icon = mobileMenu.querySelector('i');
+            if(icon) { icon.classList.add('fa-bars'); icon.classList.remove('fa-times'); }
+        });
+    });
+</script>
+</body>
+</html>

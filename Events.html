@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events Management | Orovie Hospitality Institute</title>
+    <link rel="icon" type="image/x-icon" href="logo.png">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <style>
+        :root {
+            --accent: #b8926a; 
+            --accent-dark: #9b6e48;
+            --bg: #fdfcfb;     
+            --ink: #1a1a1a;    
+            --muted: #7a7a7a;
+            --white: #ffffff;
+            --light-beige: #faf8f5;
+            --transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Montserrat', sans-serif; 
+            background-color: var(--bg); 
+            color: var(--ink);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, .logo { font-family: 'Cormorant Garamond', serif; font-weight: 300; }
+
+        /* --- NAVIGATION (identical to main site) --- */
+        nav {
+            position: fixed;
+            top: 0; width: 100%;
+            padding: 40px 5%;
+            display: flex; justify-content: space-between; align-items: center;
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        nav.scrolled {
+            padding: 20px 5%;
+            background: rgba(253, 252, 251, 0.98);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .logo { font-size: 1.5rem; letter-spacing: 2px; text-decoration: none; color: var(--ink); flex: 1; font-weight: 500; }
+
+        .nav-links { display: flex; gap: 40px; list-style: none; align-items: center; }
+        .nav-links a {
+            text-decoration: none;
+            color: var(--ink);
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: var(--transition);
+        }
+        .nav-links a:hover, .nav-links a.active { color: var(--accent); }
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        /* dropdown */
+        .nav-links li {
+            position: relative;
+            display: inline-block;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #ffffff;
+            min-width: 220px;
+            box-shadow: 0px 8px 16px rgba(0,0,0,0.1);
+            z-index: 1;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            border-radius: 4px;
+            top: 100%;
+            left: 0;
+        }
+        .dropdown-content li a {
+            color: #333;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            transition: background 0.3s;
+            font-size: 0.7rem;
+            letter-spacing: 1px;
+        }
+        .dropdown-content li a:hover {
+            background-color: #f1f1f1;
+            color: var(--accent);
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        .dropbtn i {
+            font-size: 12px;
+            margin-left: 5px;
+        }
+
+        /* Hero */
+        .hero-events {
+            min-height: 65vh;
+            padding: 180px 5% 100px;
+            background: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.45)), url('https://i.pinimg.com/1200x/6b/06/c6/6b06c6c5b3a14d40ae5a633690bf8ad6.jpg ') center/cover fixed;
+            display: flex;
+            align-items: flex-end;
+            color: white;
+        }
+        .hero-events .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        .hero-events h1 {
+            font-size: clamp(3rem, 8vw, 5.5rem);
+            line-height: 1.1;
+            font-weight: 500;
+        }
+        .hero-events p {
+            font-size: 1.1rem;
+            max-width: 650px;
+            margin-top: 20px;
+            opacity: 0.9;
+        }
+
+        /* Section utilities */
+        .section-padding {
+            padding: 100px 5%;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.5rem, 4vw, 3.8rem);
+            line-height: 1.2;
+            margin-bottom: 20px;
+            color: var(--ink);
+        }
+        .section-sub {
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        /* Curriculum Grid */
+        .curriculum-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        .course-card {
+            background: var(--white);
+            padding: 28px;
+            border-radius: 12px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.03);
+            transition: var(--transition);
+            border: 1px solid rgba(184,146,106,0.15);
+        }
+        .course-card:hover {
+            transform: translateY(-6px);
+            border-color: var(--accent);
+            box-shadow: 0 25px 40px rgba(0,0,0,0.05);
+        }
+        .course-code {
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            color: var(--accent);
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+        .course-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+        .course-desc {
+            font-size: 0.85rem;
+            color: var(--muted);
+            line-height: 1.5;
+        }
+
+        /* two column for requirements */
+        .two-col-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: start;
+        }
+        .requirement-list {
+            list-style: none;
+        }
+        .requirement-list li {
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            font-size: 0.95rem;
+        }
+        .requirement-list i {
+            color: var(--accent);
+            width: 22px;
+            font-size: 1rem;
+        }
+        .info-card {
+            background: var(--light-beige);
+            padding: 40px;
+            border-radius: 24px;
+        }
+        .info-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+        .badge-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin: 25px 0;
+        }
+        .badge {
+            background: white;
+            padding: 8px 20px;
+            border-radius: 40px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--ink);
+            border: 1px solid var(--accent);
+        }
+
+        .btn-luxury {
+            display: inline-block;
+            padding: 18px 40px;
+            border: 1px solid var(--ink);
+            color: var(--ink);
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+        .btn-luxury.dark {
+            background: var(--ink);
+            color: var(--white);
+            border: none;
+        }
+        .btn-luxury.dark:hover {
+            background: var(--accent);
+        }
+        footer {
+            background: #f4f1ee;
+            text-align: center;
+            padding: 50px 5%;
+            border-top: 1px solid rgba(0,0,0,0.05);
+        }
+
+        @media (max-width: 992px) {
+            nav { padding: 20px 5%; background: var(--bg); }
+            .menu-toggle { display: block; }
+            .nav-links {
+                position: fixed;
+                top: 0; right: -100%;
+                height: 100vh; width: 80%;
+                background: var(--white);
+                flex-direction: column;
+                justify-content: center;
+                transition: 0.5s ease-in-out;
+                box-shadow: -10px 0 30px rgba(0,0,0,0.05);
+                gap: 30px;
+            }
+            .nav-links.active { right: 0; }
+            .two-col-layout { grid-template-columns: 1fr; gap: 40px; }
+            .hero-events { background-attachment: scroll; }
+        }
+        @media (max-width: 600px) {
+            .section-padding { padding: 60px 5%; }
+            .curriculum-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+<nav id="navbar">
+    <a href="index.html" class="logo">Orovie Hospitality Institute</a>
+    <ul class="nav-links" id="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="About.html">About</a></li>
+        <li class="dropdown">
+            <a href="Courses.html" class="dropbtn">Courses <i class="fa-solid fa-caret-down"></i></a>
+            <ul class="dropdown-content">
+                <li><a href="Culinary.html">Culinary Arts</a></li>
+                <li><a href="Baking.html">Baking & Pastry Arts</a></li>
+                <li><a href="Bartending.html">Bartending & Mixology</a></li>
+                <li><a href="Hotel.html">Hotel Administration</a></li>
+                <li><a href="Protocol.html">Protocol & Etiquette</a></li>
+                <li><a href="Events.html">Events Management</a></li>
+                <li><a href="Tourism.html">Tourism Management</a></li>
+                <li><a href="CulinaryManagement.html">Culinary & Food Service MNGT</a></li>
+                <li><a href="Brand_Management.html">Brand Management</a></li>
+            </ul>
+        </li>
+        <li><a href="Mission.html">Mission</a></li>
+        <li><a href="Apply.html">Apply Today</a></li>
+        <li><a href="Contact.html">Contact</a></li>
+    </ul>
+    <div class="menu-toggle" id="mobile-menu">
+        <i class="fa-solid fa-bars"></i>
+    </div>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero-events">
+    <div class="container">
+        <h1 data-aos="fade-up">Events <br>Management</h1>
+        <p data-aos="fade-up" data-aos-delay="150">Master the art of orchestrating unforgettable experiences — from intimate gatherings to large-scale international events. Learn to plan, execute, and innovate with precision and creativity.</p>
+    </div>
+</section>
+
+<!-- Curriculum based on the provided "Events Management" outline -->
+<section class="section-padding">
+    <div class="container">
+        <span class="section-sub" data-aos="fade-up">The Architect of Extraordinary Moments</span>
+        <h2 class="section-title" data-aos="fade-up" data-aos-delay="50">Comprehensive Events Management Curriculum</h2>
+        <p data-aos="fade-up" data-aos-delay="100">This programme explores the principles and practices of managing medium- and large-scale events, including festivals, conventions, concerts, shows, sporting events, and ceremonies. Emphasis is placed on organization, site preparation, communications, personnel, security, evaluation, and innovation.</p>
+        
+        <div class="curriculum-grid" data-aos="fade-up" data-aos-delay="200">
+            <!-- Courses from the provided Events Management curriculum -->
+            <div class="course-card"><div class="course-code">EV111</div><div class="course-title">Event Management Planning & Co-ordination</div><div class="course-desc">Foundations of event lifecycle: concept development, logistics, timelines, and stakeholder management.</div></div>
+            <div class="course-card"><div class="course-code">EV112</div><div class="course-title">Presentation Skills</div><div class="course-desc">Public speaking, pitching to clients, and commanding the stage as an event professional.</div></div>
+            <div class="course-card"><div class="course-code">EV113</div><div class="course-title">Conference Planning</div><div class="course-desc">Venue selection, speaker management, delegate registration, and programme design.</div></div>
+            <div class="course-card"><div class="course-code">EV114</div><div class="course-title">Corporate Event Management</div><div class="course-desc">Product launches, galas, award ceremonies, board retreats, and shareholder meetings.</div></div>
+            <div class="course-card"><div class="course-code">EV115</div><div class="course-title">Budgeting</div><div class="course-desc">Financial planning, cost control, sponsorship models, and ROI analysis for events.</div></div>
+            <div class="course-card"><div class="course-code">EV116</div><div class="course-title">Exhibition Management</div><div class="course-desc">Trade show coordination, booth design, vendor relations, and visitor flow optimisation.</div></div>
+            <div class="course-card"><div class="course-code">EV117</div><div class="course-title">Celebrity / Artist Management</div><div class="course-desc">Contracts, riders, hospitality, security, and liaison with talent agencies.</div></div>
+            <div class="course-card"><div class="course-code">EV118</div><div class="course-title">Marketing the Event</div><div class="course-desc">Digital campaigns, ticketing platforms, PR, social media, and audience engagement strategies.</div></div>
+            <!-- Additional expanded modules based on industry best practices and Orovie's holistic approach -->
+            <div class="course-card"><div class="course-code">EV201</div><div class="course-title">Festival & Large-Scale Event Operations</div><div class="course-desc">Site layout, crowd management, sanitation, power, water, and emergency protocols.</div></div>
+            <div class="course-card"><div class="course-code">EV202</div><div class="course-title">Wedding Planning & Design</div><div class="course-desc">Bridal consulting, vendor negotiation, timeline creation, and luxury wedding execution.</div></div>
+            <div class="course-card"><div class="course-code">EV203</div><div class="course-title">Risk Management & Event Security</div><div class="course-desc">Liability, insurance, contingency planning, and collaboration with security personnel.</div></div>
+            <div class="course-card"><div class="course-code">EV204</div><div class="course-title">Sustainable Event Management</div><div class="course-desc">Zero-waste events, carbon footprint reduction, and ethical sourcing for gatherings.</div></div>
+            <div class="course-card"><div class="course-code">EV205</div><div class="course-title">Event Technology & Innovation</div><div class="course-desc">Event apps, virtual/hybrid platforms, RFID, and data analytics for attendee insights.</div></div>
+            <div class="course-card"><div class="course-code">EV206</div><div class="course-title">Post-Event Evaluation & Legacy</div><div class="course-desc">Feedback analysis, ROI reporting, and creating lasting community impact.</div></div>
+        </div>
+    </div>
+</section>
+
+<!-- Requirements & Professional Attributes -->
+<section class="section-padding" style="background: var(--light-beige);">
+    <div class="container two-col-layout">
+        <div data-aos="fade-right">
+            <span class="section-sub">Programme Prerequisites</span>
+            <h2 class="section-title" style="margin-bottom: 30px;">Eligibility & Requirements</h2>
+            <ul class="requirement-list">
+                <li><i class="fa-solid fa-diploma"></i> High school diploma or equivalent (for certificate/diploma)</li>
+                <li><i class="fa-solid fa-comment-dots"></i> Strong written and verbal communication skills</li>
+                <li><i class="fa-solid fa-clock"></i> Ability to work under pressure and manage multiple deadlines</li>
+                <li><i class="fa-solid fa-laptop"></i> Personal laptop with access to Microsoft Office / Google Workspace</li>
+                <li><i class="fa-solid fa-users"></i> Team-oriented mindset and leadership potential</li>
+                <li><i class="fa-solid fa-passport"></i> Willingness to work irregular hours (events often occur evenings/weekends)</li>
+            </ul>
+            <div class="badge-list">
+                <span class="badge">Certificate (4 months)</span>
+                <span class="badge">Diploma (12 months)</span>
+                <span class="badge">Advanced Diploma (18 months with practicum)</span>
+            </div>
+        </div>
+        <div data-aos="fade-left">
+            <div class="info-card">
+                <i class="fa-solid fa-calendar-star" style="font-size: 2rem; color: var(--accent); margin-bottom: 15px; display: inline-block;"></i>
+                <h3>Programme Highlights</h3>
+                <p><strong>Duration:</strong> 4-18 months depending on pathway<br>
+                <strong>Practical immersion:</strong> Students plan and execute live events — from concept to teardown — as part of the curriculum.<br>
+                <strong>Industry exposure:</strong> Site visits to convention centres, festival grounds, and production houses. Guest lectures by leading event planners.<br>
+                <strong>Capstone project:</strong> Design and manage a real event for an external client or charity partner.</p>
+                <hr style="margin: 25px 0; border-color: rgba(0,0,0,0.05);">
+                <h3 style="font-size: 1.4rem;">Key Competencies Gained</h3>
+                <ul style="list-style: none; margin-top: 15px;">
+                    <li style="margin-bottom: 10px;">✓ End-to-end event planning and execution</li>
+                    <li style="margin-bottom: 10px;">✓ Budget development and sponsor negotiation</li>
+                    <li style="margin-bottom: 10px;">✓ Crisis management and on-the-fly problem solving</li>
+                    <li style="margin-bottom: 10px;">✓ Vendor and venue contract management</li>
+                    <li>✓ Marketing and ticket sales strategies for maximum attendance</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Practical Experience & Philosophy -->
+<section class="section-padding">
+    <div class="container two-col-layout" style="gap: 50px;">
+        <div data-aos="fade-up">
+            <img src="https://i.pinimg.com/736x/ac/db/e7/acdbe71f587f63556d77e8c9e0630c8e.jpg" alt="Live Event Management" style="width: 100%; border-radius: 28px; box-shadow: 0 20px 35px rgba(0,0,0,0.05);">
+        </div>
+        <div data-aos="fade-up" data-aos-delay="150">
+            <span class="section-sub">Learning by Doing</span>
+            <h2 class="section-title">Real Events, Real Responsibility</h2>
+            <p style="margin-bottom: 20px;">At Orovie, we believe that events management cannot be learned from textbooks alone. Our students gain direct practical experience by organising and staffing actual events — from university galas to community festivals, corporate launches, and wedding expos.</p>
+            <p>You will work alongside industry mentors, manage budgets, coordinate vendors, and handle last-minute challenges in a safe, supervised environment. By graduation, you will have a portfolio of executed events and the confidence to lead any project.</p>
+            <div style="margin-top: 35px;">
+                <a href="Apply.html" class="btn-luxury dark">Start Your Events Journey →</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Institutional Values: Excellence & Partnership -->
+<section class="practical-note" style="background: var(--ink); color: white;">
+    <div class="container" data-aos="zoom-in">
+        <i class="fa-solid fa-handshake" style="font-size: 3rem; color: var(--accent); margin-bottom: 20px; display: inline-block;"></i>
+        <h2 style="font-family: 'Cormorant Garamond'; font-size: 2.5rem; margin-bottom: 20px;">Partnership & Integrity</h2>
+        <p style="max-width: 750px; margin: 0 auto; opacity: 0.85;">"We value partnership and achieve our goals through working together in ways that are mutually beneficial. We take pride in engaging in business with integrity and we make our decisions based on honesty and ethical behaviour."</p>
+        <p style="margin-top: 20px;">Every event graduate embodies these values — building trust with clients, vendors, and attendees while delivering flawless, memorable experiences.</p>
+    </div>
+</section>
+
+<!-- Career Destinations -->
+<section class="section-padding">
+    <div class="container" style="text-align: center;">
+        <span class="section-sub">Global Career Pathways</span>
+        <h2 class="section-title">Where Events Professionals Lead</h2>
+        <div class="badge-list" style="justify-content: center; margin: 40px 0;">
+            <span class="badge">Event Manager</span>
+            <span class="badge">Conference Coordinator</span>
+            <span class="badge">Wedding Planner</span>
+            <span class="badge">Festival Director</span>
+            <span class="badge">Corporate Events Manager</span>
+            <span class="badge">Exhibition Organiser</span>
+            <span class="badge">Celebrity Talent Liaison</span>
+            <span class="badge">Event Marketing Specialist</span>
+            <span class="badge">Venue Operations Manager</span>
+        </div>
+        <p style="max-width: 800px; margin: 0 auto;">Orovie Events Management graduates are employed by event agencies, convention bureaus, hotels, corporations, non-profits, and sports organisations worldwide. The events industry is growing rapidly, and skilled professionals who can deliver with creativity and precision are in constant demand.</p>
+    </div>
+</section>
+
+<footer>
+    <p style="color: #5a5a5a; font-size: 0.85rem;">&copy; 2025 Orovie Hospitality Institute. Excellence Refined. — Events Management Programme</p>
+</footer>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    AOS.init({ duration: 1000, once: true });
+    window.addEventListener('scroll', () => {
+        const nav = document.getElementById('navbar');
+        if (window.scrollY > 80) nav.classList.add('scrolled');
+        else nav.classList.remove('scrolled');
+    });
+    const mobileMenu = document.getElementById('mobile-menu');
+    const navLinks = document.getElementById('nav-links');
+    mobileMenu.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+        const icon = mobileMenu.querySelector('i');
+        icon.classList.toggle('fa-bars');
+        icon.classList.toggle('fa-times');
+    });
+    document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', () => {
+            navLinks.classList.remove('active');
+            const icon = mobileMenu.querySelector('i');
+            if(icon) { icon.classList.add('fa-bars'); icon.classList.remove('fa-times'); }
+        });
+    });
+</script>
+</body>
+</html>

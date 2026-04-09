@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Culinary & Food Service Management | Orovie Hospitality Institute</title>
+    <link rel="icon" type="image/x-icon" href="logo.png">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <style>
+        :root {
+            --accent: #b8926a; 
+            --accent-dark: #9b6e48;
+            --bg: #fdfcfb;     
+            --ink: #1a1a1a;    
+            --muted: #7a7a7a;
+            --white: #ffffff;
+            --light-beige: #faf8f5;
+            --transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Montserrat', sans-serif; 
+            background-color: var(--bg); 
+            color: var(--ink);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, .logo { font-family: 'Cormorant Garamond', serif; font-weight: 300; }
+
+        /* --- NAVIGATION (identical to main site) --- */
+        nav {
+            position: fixed;
+            top: 0; width: 100%;
+            padding: 40px 5%;
+            display: flex; justify-content: space-between; align-items: center;
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        nav.scrolled {
+            padding: 20px 5%;
+            background: rgba(253, 252, 251, 0.98);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .logo { font-size: 1.5rem; letter-spacing: 2px; text-decoration: none; color: var(--ink); flex: 1; font-weight: 500; }
+
+        .nav-links { display: flex; gap: 40px; list-style: none; align-items: center; }
+        .nav-links a {
+            text-decoration: none;
+            color: var(--ink);
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: var(--transition);
+        }
+        .nav-links a:hover, .nav-links a.active { color: var(--accent); }
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        /* dropdown */
+        .nav-links li {
+            position: relative;
+            display: inline-block;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #ffffff;
+            min-width: 240px;
+            box-shadow: 0px 8px 16px rgba(0,0,0,0.1);
+            z-index: 1;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            border-radius: 4px;
+            top: 100%;
+            left: 0;
+        }
+        .dropdown-content li a {
+            color: #333;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            transition: background 0.3s;
+            font-size: 0.7rem;
+            letter-spacing: 1px;
+        }
+        .dropdown-content li a:hover {
+            background-color: #f1f1f1;
+            color: var(--accent);
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        .dropbtn i {
+            font-size: 12px;
+            margin-left: 5px;
+        }
+
+        /* Hero */
+        .hero-fsm {
+            min-height: 65vh;
+            padding: 180px 5% 100px;
+            background: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.45)), url('https://i.pinimg.com/1200x/08/c7/26/08c7265e845869f00fb938c2b6532e93.jpg') center/cover fixed;
+            display: flex;
+            align-items: flex-end;
+            color: white;
+        }
+        .hero-fsm .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        .hero-fsm h1 {
+            font-size: clamp(3rem, 8vw, 5.5rem);
+            line-height: 1.1;
+            font-weight: 500;
+        }
+        .hero-fsm p {
+            font-size: 1.1rem;
+            max-width: 650px;
+            margin-top: 20px;
+            opacity: 0.9;
+        }
+
+        /* Section utilities */
+        .section-padding {
+            padding: 100px 5%;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.5rem, 4vw, 3.8rem);
+            line-height: 1.2;
+            margin-bottom: 20px;
+            color: var(--ink);
+        }
+        .section-sub {
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        /* Curriculum Grid */
+        .curriculum-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        .course-card {
+            background: var(--white);
+            padding: 28px;
+            border-radius: 12px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.03);
+            transition: var(--transition);
+            border: 1px solid rgba(184,146,106,0.15);
+        }
+        .course-card:hover {
+            transform: translateY(-6px);
+            border-color: var(--accent);
+            box-shadow: 0 25px 40px rgba(0,0,0,0.05);
+        }
+        .course-code {
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            color: var(--accent);
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+        .course-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+        .course-desc {
+            font-size: 0.85rem;
+            color: var(--muted);
+            line-height: 1.5;
+        }
+
+        /* two column for requirements */
+        .two-col-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: start;
+        }
+        .requirement-list {
+            list-style: none;
+        }
+        .requirement-list li {
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            font-size: 0.95rem;
+        }
+        .requirement-list i {
+            color: var(--accent);
+            width: 22px;
+            font-size: 1rem;
+        }
+        .info-card {
+            background: var(--light-beige);
+            padding: 40px;
+            border-radius: 24px;
+        }
+        .info-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+        .badge-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin: 25px 0;
+        }
+        .badge {
+            background: white;
+            padding: 8px 20px;
+            border-radius: 40px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--ink);
+            border: 1px solid var(--accent);
+        }
+
+        .btn-luxury {
+            display: inline-block;
+            padding: 18px 40px;
+            border: 1px solid var(--ink);
+            color: var(--ink);
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+        .btn-luxury.dark {
+            background: var(--ink);
+            color: var(--white);
+            border: none;
+        }
+        .btn-luxury.dark:hover {
+            background: var(--accent);
+        }
+        footer {
+            background: #f4f1ee;
+            text-align: center;
+            padding: 50px 5%;
+            border-top: 1px solid rgba(0,0,0,0.05);
+        }
+
+        @media (max-width: 992px) {
+            nav { padding: 20px 5%; background: var(--bg); }
+            .menu-toggle { display: block; }
+            .nav-links {
+                position: fixed;
+                top: 0; right: -100%;
+                height: 100vh; width: 80%;
+                background: var(--white);
+                flex-direction: column;
+                justify-content: center;
+                transition: 0.5s ease-in-out;
+                box-shadow: -10px 0 30px rgba(0,0,0,0.05);
+                gap: 30px;
+            }
+            .nav-links.active { right: 0; }
+            .two-col-layout { grid-template-columns: 1fr; gap: 40px; }
+            .hero-fsm { background-attachment: scroll; }
+        }
+        @media (max-width: 600px) {
+            .section-padding { padding: 60px 5%; }
+            .curriculum-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+<nav id="navbar">
+    <a href="index.html" class="logo">Orovie Hospitality Institute</a>
+    <ul class="nav-links" id="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="About.html">About</a></li>
+        <li class="dropdown">
+            <a href="Courses.html" class="dropbtn">Courses <i class="fa-solid fa-caret-down"></i></a>
+            <ul class="dropdown-content">
+                <li><a href="Culinary.html">Culinary Arts</a></li>
+                <li><a href="Baking.html">Baking & Pastry Arts</a></li>
+                <li><a href="Bartending.html">Bartending & Mixology</a></li>
+                <li><a href="Hotel.html">Hotel Administration</a></li>
+                <li><a href="Protocol.html">Protocol & Etiquette</a></li>
+                <li><a href="Events.html">Events Management</a></li>
+                <li><a href="Tourism.html">Tourism Management</a></li>
+                <li><a href="CulinaryManagement.html">Culinary & Food Service MNGT</a></li>
+                <li><a href="Brand_Management.html">Brand Management</a></li>
+            </ul>
+        </li>
+        <li><a href="Mission.html">Mission</a></li>
+        <li><a href="Apply.html">Apply Today</a></li>
+        <li><a href="Contact.html">Contact</a></li>
+    </ul>
+    <div class="menu-toggle" id="mobile-menu">
+        <i class="fa-solid fa-bars"></i>
+    </div>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero-fsm">
+    <div class="container">
+        <h1 data-aos="fade-up">Culinary & <br>Food Service Management</h1>
+        <p data-aos="fade-up" data-aos-delay="150">Bridge the art of culinary excellence with the science of business management. Lead profitable, high-performing food service operations in hotels, restaurants, and institutions.</p>
+    </div>
+</section>
+
+<!-- Curriculum: Integrated culinary + management focus -->
+<section class="section-padding">
+    <div class="container">
+        <span class="section-sub" data-aos="fade-up">Where Culinary Art Meets Business Acumen</span>
+        <h2 class="section-title" data-aos="fade-up" data-aos-delay="50">Integrated Curriculum</h2>
+        <p data-aos="fade-up" data-aos-delay="100">This programme combines advanced culinary techniques with strategic management principles. Students master food production, cost control, supply chain, team leadership, and service excellence — preparing them for executive roles in the dynamic food service industry.</p>
+        
+        <div class="curriculum-grid" data-aos="fade-up" data-aos-delay="200">
+            <!-- Core culinary management courses (synthesized from Catering Management + Managing Management + strategic modules) -->
+            <div class="course-card"><div class="course-code">FSM401</div><div class="course-title">Food Service Operations Management</div><div class="course-desc">Workflow design, shift scheduling, throughput optimisation, and quality assurance systems.</div></div>
+            <div class="course-card"><div class="course-code">FSM402</div><div class="course-title">Advanced Food Production & Kitchen Leadership</div><div class="course-desc">Volume cooking, menu engineering, classical and modern techniques, and brigade management.</div></div>
+            <div class="course-card"><div class="course-code">FSM403</div><div class="course-title">Cost Control & Financial Management in F&B</div><div class="course-desc">Food cost percentage, inventory valuation, menu pricing strategies, and P&L analysis.</div></div>
+            <div class="course-card"><div class="course-code">FSM404</div><div class="course-title">Procurement, Supply Chain & Vendor Relations</div><div class="course-desc">Sourcing, contract negotiation, quality grading, and sustainable purchasing.</div></div>
+            <div class="course-card"><div class="course-code">FSM405</div><div class="course-title">Restaurant & Catering Law</div><div class="course-desc">Licensing, health codes, employment law, liability, and risk management in food service.</div></div>
+            <div class="course-card"><div class="course-code">FSM406</div><div class="course-title">Human Resource Management for Food Service</div><div class="course-desc">Recruiting, training, retention, labor scheduling, and performance evaluation for culinary teams.</div></div>
+            <div class="course-card"><div class="course-code">FSM407</div><div class="course-title">Menu Design & Gastronomic Marketing</div><div class="course-desc">Psychology of menu layout, copywriting, visual appeal, and cross-selling techniques.</div></div>
+            <div class="course-card"><div class="course-code">FSM408</div><div class="course-title">Food Safety & HACCP Management</div><div class="course-desc">Advanced HACCP plans, auditing, crisis management, and ISO standards in food safety.</div></div>
+            <div class="course-card"><div class="course-code">FSM409</div><div class="course-title">Catering Business Management</div><div class="course-desc">Licenses and permits, kitchen design, party planning, cooking for crowds, and pricing services.</div></div>
+            <div class="course-card"><div class="course-code">FSM410</div><div class="course-title">Nutrition & Dietetics for Food Service</div><div class="course-desc">Special dietary needs, allergen management, therapeutic menus, and wellness programming.</div></div>
+            <div class="course-card"><div class="course-code">FSM411</div><div class="course-title">Technology in Food Service Management</div><div class="course-desc">POS systems, inventory software, kitchen display systems, and data analytics for decision making.</div></div>
+            <div class="course-card"><div class="course-code">FSM412</div><div class="course-title">Sustainability & Food Security</div><div class="course-desc">Waste reduction, farm-to-table models, circular economy, and ethical sourcing.</div></div>
+            <div class="course-card"><div class="course-code">FSM413</div><div class="course-title">Customer Experience & Service Excellence</div><div class="course-desc">Managing front-of-house, complaint resolution, loyalty programs, and guest journey mapping.</div></div>
+            <div class="course-card"><div class="course-code">FSM414</div><div class="course-title">Capstone: Food Service Business Plan</div><div class="course-desc">Develop a complete business plan for a restaurant, catering company, or institutional food service.</div></div>
+        </div>
+    </div>
+</section>
+
+<!-- Requirements & Professional Attributes -->
+<section class="section-padding" style="background: var(--light-beige);">
+    <div class="container two-col-layout">
+        <div data-aos="fade-right">
+            <span class="section-sub">Programme Prerequisites</span>
+            <h2 class="section-title" style="margin-bottom: 30px;">Eligibility & Requirements</h2>
+            <ul class="requirement-list">
+                <li><i class="fa-solid fa-diploma"></i> High school diploma or equivalent (for diploma/degree)</li>
+                <li><i class="fa-solid fa-kitchen-set"></i> Basic culinary knowledge recommended but not required</li>
+                <li><i class="fa-solid fa-calculator"></i> Aptitude for numbers and cost analysis</li>
+                <li><i class="fa-solid fa-laptop"></i> Personal laptop with spreadsheet capabilities</li>
+                <li><i class="fa-solid fa-users"></i> Leadership potential and team orientation</li>
+                <li><i class="fa-solid fa-heartbeat"></i> Food safety certification (can be obtained during programme)</li>
+            </ul>
+            <div class="badge-list">
+                <span class="badge">Diploma (18 months)</span>
+                <span class="badge">Bachelor's Degree (36 months)</span>
+                <span class="badge">Executive Certificate (6 months)</span>
+            </div>
+        </div>
+        <div data-aos="fade-left">
+            <div class="info-card">
+                <i class="fa-solid fa-chart-line" style="font-size: 2rem; color: var(--accent); margin-bottom: 15px; display: inline-block;"></i>
+                <h3>Programme Highlights</h3>
+                <p><strong>Duration:</strong> 18 months (Diploma) | 36 months (Degree with internship)<br>
+                <strong>Practical immersion:</strong> 600+ hours in simulated and live food service environments, including our training restaurant and catering operations.<br>
+                <strong>Unique features:</strong> Live menu costing projects, vendor negotiation simulations, and a mandatory externship in a commercial kitchen or food service corporation.<br>
+                <strong>Certification prep:</strong> HACCP, ServSafe, and food service management credentials.</p>
+                <hr style="margin: 25px 0; border-color: rgba(0,0,0,0.05);">
+                <h3 style="font-size: 1.4rem;">Key Competencies Gained</h3>
+                <ul style="list-style: none; margin-top: 15px;">
+                    <li style="margin-bottom: 10px;">✓ Manage P&L for food and beverage operations</li>
+                    <li style="margin-bottom: 10px;">✓ Lead culinary teams and front-of-house staff</li>
+                    <li style="margin-bottom: 10px;">✓ Design profitable, on-trend menus</li>
+                    <li style="margin-bottom: 10px;">✓ Implement food safety systems at enterprise level</li>
+                    <li>✓ Launch and scale a catering or restaurant business</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Managing Management Course Highlight (from original file) -->
+<section class="section-padding">
+    <div class="container two-col-layout" style="gap: 50px;">
+        <div data-aos="fade-up">
+            <img src=" https://i.pinimg.com/1200x/ab/13/6f/ab136f8ea2125f83cb261ebdb6e97ed7.jpg" alt="Food Service Management" style="width: 100%; border-radius: 28px; box-shadow: 0 20px 35px rgba(0,0,0,0.05);">
+        </div>
+        <div data-aos="fade-up" data-aos-delay="150">
+            <span class="section-sub">Core Module Spotlight</span>
+            <h2 class="section-title">Managing Management in Catering Business</h2>
+            <p style="margin-bottom: 20px;">This critical course discusses in detail the critical aspects of management involved in running a catering business: how to get the appropriate licenses and permits, what kind of kitchen you need, basic food safety practices, party planning, cooking for a crowd, planning meals, dealing with customers, understanding how to price your services, and moving the food safely from one location to another.</p>
+            <p>Students graduate with a complete operational toolkit — from concept to execution — ready to lead any food service enterprise with confidence and precision.</p>
+            <div style="margin-top: 35px;">
+                <a href="Apply.html" class="btn-luxury dark">Launch Your Leadership Career →</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Institutional Mission: Dignity in Labour & Professionalism -->
+<section class="practical-note" style="background: var(--ink); color: white;">
+    <div class="container" data-aos="zoom-in">
+        <i class="fa-solid " style="font-size: 3rem; color: var(--accent); margin-bottom: 20px; display: inline-block;"></i>
+        <h2 style="font-family: 'Cormorant Garamond'; font-size: 2.5rem; margin-bottom: 20px;">Dignity in Labour, Excellence in Leadership</h2>
+        <p style="max-width: 750px; margin: 0 auto; opacity: 0.85;">"We inculcate into the students that there is dignity in labour through ample exposure and involvement in practical hands-on skills. Our students master scarce professional skills, obtaining high levels of specialised knowledge needed to excel in the competitive hospitality environment."</p>
+        <p style="margin-top: 20px;">Culinary & Food Service Management graduates leave Orovie with both the practical mastery of the kitchen and the strategic mind of an executive — ready to work anywhere in the world.</p>
+    <BR><BR> </div>
+</section>
+
+<!-- Career Destinations -->
+<section class="section-padding">
+    <div class="container" style="text-align: center;">
+        <span class="section-sub">Global Career Pathways</span>
+        <h2 class="section-title">Where Food Service Leaders Excel</h2>
+        <div class="badge-list" style="justify-content: center; margin: 40px 0;">
+            <span class="badge">Food & Beverage Director</span>
+            <span class="badge">Restaurant General Manager</span>
+            <span class="badge">Catering Operations Manager</span>
+            <span class="badge">Corporate Chef</span>
+            <span class="badge">Food Service Consultant</span>
+            <span class="badge">Institutional Food Service Director</span>
+            <span class="badge">Culinary Entrepreneur</span>
+            <span class="badge">Supply Chain Manager (Food)</span>
+        </div>
+        <p style="max-width: 800px; margin: 0 auto;">Our graduates are recruited by hotel chains, independent restaurants, contract catering companies, healthcare and education food services, and culinary startups. The global food service market demands leaders who understand both the craft and the business — Orovie delivers exactly that.</p>
+    </div>
+</section>
+
+<footer>
+    <p style="color: #5a5a5a; font-size: 0.85rem;">&copy; 2025 Orovie Hospitality Institute. Excellence Refined. — Culinary & Food Service Management Programme</p>
+</footer>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    AOS.init({ duration: 1000, once: true });
+    window.addEventListener('scroll', () => {
+        const nav = document.getElementById('navbar');
+        if (window.scrollY > 80) nav.classList.add('scrolled');
+        else nav.classList.remove('scrolled');
+    });
+    const mobileMenu = document.getElementById('mobile-menu');
+    const navLinks = document.getElementById('nav-links');
+    mobileMenu.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+        const icon = mobileMenu.querySelector('i');
+        icon.classList.toggle('fa-bars');
+        icon.classList.toggle('fa-times');
+    });
+    document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', () => {
+            navLinks.classList.remove('active');
+            const icon = mobileMenu.querySelector('i');
+            if(icon) { icon.classList.add('fa-bars'); icon.classList.remove('fa-times'); }
+        });
+    });
+</script>
+</body>
+</html>

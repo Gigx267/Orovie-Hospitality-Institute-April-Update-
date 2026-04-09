@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Administration | Orovie Hospitality Institute</title>
+    <link rel="icon" type="image/x-icon" href="logo.png">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <style>
+        :root {
+            --accent: #b8926a; 
+            --accent-dark: #9b6e48;
+            --bg: #fdfcfb;     
+            --ink: #1a1a1a;    
+            --muted: #7a7a7a;
+            --white: #ffffff;
+            --light-beige: #faf8f5;
+            --transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Montserrat', sans-serif; 
+            background-color: var(--bg); 
+            color: var(--ink);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, .logo { font-family: 'Cormorant Garamond', serif; font-weight: 300; }
+
+        /* --- NAVIGATION (identical to main site) --- */
+        nav {
+            position: fixed;
+            top: 0; width: 100%;
+            padding: 40px 5%;
+            display: flex; justify-content: space-between; align-items: center;
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        nav.scrolled {
+            padding: 20px 5%;
+            background: rgba(253, 252, 251, 0.98);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .logo { font-size: 1.5rem; letter-spacing: 2px; text-decoration: none; color: var(--ink); flex: 1; font-weight: 500; }
+
+        .nav-links { display: flex; gap: 40px; list-style: none; align-items: center; }
+        .nav-links a {
+            text-decoration: none;
+            color: var(--ink);
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: var(--transition);
+        }
+        .nav-links a:hover, .nav-links a.active { color: var(--accent); }
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        /* dropdown */
+        .nav-links li {
+            position: relative;
+            display: inline-block;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #ffffff;
+            min-width: 220px;
+            box-shadow: 0px 8px 16px rgba(0,0,0,0.1);
+            z-index: 1;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            border-radius: 4px;
+            top: 100%;
+            left: 0;
+        }
+        .dropdown-content li a {
+            color: #333;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            transition: background 0.3s;
+            font-size: 0.7rem;
+            letter-spacing: 1px;
+        }
+        .dropdown-content li a:hover {
+            background-color: #f1f1f1;
+            color: var(--accent);
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        .dropbtn i {
+            font-size: 12px;
+            margin-left: 5px;
+        }
+
+        /* Hero */
+        .hero-hotel {
+            min-height: 65vh;
+            padding: 180px 5% 100px;
+            background: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.45)), url('https://i.pinimg.com/736x/e3/95/07/e395077467c95a12eb6053ff7b6a6ac0.jpg') center/cover fixed;
+            display: flex;
+            align-items: flex-end;
+            color: white;
+        }
+        .hero-hotel .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        .hero-hotel h1 {
+            font-size: clamp(3rem, 8vw, 5.5rem);
+            line-height: 1.1;
+            font-weight: 500;
+        }
+        .hero-hotel p {
+            font-size: 1.1rem;
+            max-width: 650px;
+            margin-top: 20px;
+            opacity: 0.9;
+        }
+
+        /* Section utilities */
+        .section-padding {
+            padding: 100px 5%;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.5rem, 4vw, 3.8rem);
+            line-height: 1.2;
+            margin-bottom: 20px;
+            color: var(--ink);
+        }
+        .section-sub {
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        /* Curriculum Grid */
+        .curriculum-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        .course-card {
+            background: var(--white);
+            padding: 28px;
+            border-radius: 12px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.03);
+            transition: var(--transition);
+            border: 1px solid rgba(184,146,106,0.15);
+        }
+        .course-card:hover {
+            transform: translateY(-6px);
+            border-color: var(--accent);
+            box-shadow: 0 25px 40px rgba(0,0,0,0.05);
+        }
+        .course-code {
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            color: var(--accent);
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+        .course-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+        .course-desc {
+            font-size: 0.85rem;
+            color: var(--muted);
+            line-height: 1.5;
+        }
+
+        /* two column for requirements */
+        .two-col-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: start;
+        }
+        .requirement-list {
+            list-style: none;
+        }
+        .requirement-list li {
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            font-size: 0.95rem;
+        }
+        .requirement-list i {
+            color: var(--accent);
+            width: 22px;
+            font-size: 1rem;
+        }
+        .info-card {
+            background: var(--light-beige);
+            padding: 40px;
+            border-radius: 24px;
+        }
+        .info-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+        .badge-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin: 25px 0;
+        }
+        .badge {
+            background: white;
+            padding: 8px 20px;
+            border-radius: 40px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--ink);
+            border: 1px solid var(--accent);
+        }
+
+        .btn-luxury {
+            display: inline-block;
+            padding: 18px 40px;
+            border: 1px solid var(--ink);
+            color: var(--ink);
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+        .btn-luxury.dark {
+            background: var(--ink);
+            color: var(--white);
+            border: none;
+        }
+        .btn-luxury.dark:hover {
+            background: var(--accent);
+        }
+        footer {
+            background: #f4f1ee;
+            text-align: center;
+            padding: 50px 5%;
+            border-top: 1px solid rgba(0,0,0,0.05);
+        }
+
+        @media (max-width: 992px) {
+            nav { padding: 20px 5%; background: var(--bg); }
+            .menu-toggle { display: block; }
+            .nav-links {
+                position: fixed;
+                top: 0; right: -100%;
+                height: 100vh; width: 80%;
+                background: var(--white);
+                flex-direction: column;
+                justify-content: center;
+                transition: 0.5s ease-in-out;
+                box-shadow: -10px 0 30px rgba(0,0,0,0.05);
+                gap: 30px;
+            }
+            .nav-links.active { right: 0; }
+            .two-col-layout { grid-template-columns: 1fr; gap: 40px; }
+            .hero-hotel { background-attachment: scroll; }
+        }
+        @media (max-width: 600px) {
+            .section-padding { padding: 60px 5%; }
+            .curriculum-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+<nav id="navbar">
+    <a href="index.html" class="logo">Orovie Hospitality Institute</a>
+    <ul class="nav-links" id="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="About.html">About</a></li>
+        <li class="dropdown">
+            <a href="Courses.html" class="dropbtn">Courses <i class="fa-solid fa-caret-down"></i></a>
+            <ul class="dropdown-content">
+                <li><a href="Culinary.html">Culinary Arts</a></li>
+                <li><a href="Baking.html">Baking & Pastry Arts</a></li>
+                <li><a href="Bartending.html">Bartending & Mixology</a></li>
+                <li><a href="Hotel.html">Hotel Administration</a></li>
+                <li><a href="Protocol.html">Protocol & Etiquette</a></li>
+                <li><a href="Events.html">Events Management</a></li>
+                <li><a href="Tourism.html">Tourism Management</a></li>
+                <li><a href="CulinaryManagement.html">Culinary & Food Service MNGT</a></li>
+                <li><a href="Brand_Management.html">Brand Management</a></li>
+            </ul>
+        </li>
+        <li><a href="Mission.html">Mission</a></li>
+        <li><a href="Apply.html">Apply Today</a></li>
+        <li><a href="Contact.html">Contact</a></li>
+    </ul>
+    <div class="menu-toggle" id="mobile-menu">
+        <i class="fa-solid fa-bars"></i>
+    </div>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero-hotel">
+    <div class="container">
+        <h1 data-aos="fade-up">Hotel <br>Administration</h1>
+        <p data-aos="fade-up" data-aos-delay="150">Master the art of luxury hospitality management — from front office operations to strategic leadership. Acquire the skills to lead world-class hotels, resorts, and hospitality enterprises.</p>
+    </div>
+</section>
+
+<!-- Curriculum (Based on provided Hotel / Restaurant Management + Tourism & HRM courses) -->
+<section class="section-padding">
+    <div class="container">
+        <span class="section-sub" data-aos="fade-up">Comprehensive Leadership Track</span>
+        <h2 class="section-title" data-aos="fade-up" data-aos-delay="50">Hotel Administration Curriculum</h2>
+        <p data-aos="fade-up" data-aos-delay="100">Our Hotel Administration programme blends operational excellence with executive strategy. Students explore the national and global relationships of lodging, food, and beverage operations, while mastering human resources, marketing, finance, and modern integrated technology.</p>
+        
+        <div class="curriculum-grid" data-aos="fade-up" data-aos-delay="200">
+            <!-- Courses from Hotel/Restaurant Management list + added strategic modules -->
+            <div class="course-card"><div class="course-code">HRM111</div><div class="course-title">The Hospitality Industry</div><div class="course-desc">Scope, complexity, history, career opportunities, and global trends.</div></div>
+            <div class="course-card"><div class="course-code">HRM112</div><div class="course-title">Hotel Furnishing & Management</div><div class="course-desc">Interior design principles, FF&E procurement, and brand standards.</div></div>
+            <div class="course-card"><div class="course-code">HRM113</div><div class="course-title">Front Office & Reception Management</div><div class="course-desc">Reservations, check-in/out, guest relations, and PMS software.</div></div>
+            <div class="course-card"><div class="course-code">HRM114</div><div class="course-title">Hotel Bookkeeping & Reception</div><div class="course-desc">Night audit, accounts receivable, folio management, and billing.</div></div>
+            <div class="course-card"><div class="course-code">HRM115</div><div class="course-title">Managing Housekeeping Operations</div><div class="course-desc">Staff scheduling, inspection protocols, inventory, and laundry management.</div></div>
+            <div class="course-card"><div class="course-code">HRM116</div><div class="course-title">Hotel Accommodation & Bookkeeping</div><div class="course-desc">Yield management, revenue optimization, and financial controls.</div></div>
+            <div class="course-card"><div class="course-code">HRM117</div><div class="course-title">Hotel & Catering Law</div><div class="course-desc">Liability, contracts, guest rights, employment law, and licensing.</div></div>
+            <div class="course-card"><div class="course-code">HRM118</div><div class="course-title">Hotel Marketing & Sales</div><div class="course-desc">Branding, distribution channels, CRM, and digital marketing strategies.</div></div>
+            <div class="course-card"><div class="course-code">HRM119</div><div class="course-title">Human Resource Management</div><div class="course-desc">Recruitment, training, performance management, and labor relations.</div></div>
+            <div class="course-card"><div class="course-code">HRM120</div><div class="course-title">Marketing & Business Development</div><div class="course-desc">Market analysis, strategic partnerships, and revenue diversification.</div></div>
+            <div class="course-card"><div class="course-code">HRM121</div><div class="course-title">Project in Hotel Management</div><div class="course-desc">Capstone: develop a full business plan for a boutique or luxury hotel.</div></div>
+            <div class="course-card"><div class="course-code">HRM122</div><div class="course-title">Seminar in Hotel Management</div><div class="course-desc">Industry guest lectures, case studies, and emerging hospitality models.</div></div>
+            <div class="course-card"><div class="course-code">HRM123</div><div class="course-title">Liquor Studies</div><div class="course-desc">Bar management, beverage costing, mixology trends, and responsible service.</div></div>
+            <div class="course-card"><div class="course-code">HRM124</div><div class="course-title">Security & Loss Prevention Management</div><div class="course-desc">Risk assessment, surveillance, guest safety, and asset protection.</div></div>
+            <div class="course-card"><div class="course-code">HADV301</div><div class="course-title">Strategic Revenue Management</div><div class="course-desc">Demand forecasting, pricing tactics, and channel management.</div></div>
+            <div class="course-card"><div class="course-code">HADV302</div><div class="course-title">Luxury Brand Management</div><div class="course-desc">Positioning high-end properties, service excellence, and guest psychology.</div></div>
+        </div>
+    </div>
+</section>
+
+<!-- Requirements & Professional Competencies -->
+<section class="section-padding" style="background: var(--light-beige);">
+    <div class="container two-col-layout">
+        <div data-aos="fade-right">
+            <span class="section-sub">Admission & Professional Profile</span>
+            <h2 class="section-title" style="margin-bottom: 30px;">Programme Requirements</h2>
+            <ul class="requirement-list">
+                <li><i class="fa-solid fa-graduation-cap"></i> High school diploma or equivalent (for diploma/degree track)</li>
+                <li><i class="fa-solid fa-language"></i> Proficiency in English (written and spoken)</li>
+                <li><i class="fa-solid fa-chalkboard-user"></i> Interview with programme director</li>
+                <li><i class="fa-solid fa-laptop"></i> Personal laptop for PMS & analytics modules</li>
+                <li><i class="fa-solid fa-user-tie"></i> Professional attire for industry seminars and practicum</li>
+                <li><i class="fa-solid fa-heart"></i> Strong service orientation and leadership potential</li>
+            </ul>
+            <div class="badge-list">
+                <span class="badge">Diploma (18 months)</span>
+                <span class="badge">Bachelor's Degree (36 months)</span>
+                <span class="badge">Executive Certificate (6 months)</span>
+            </div>
+        </div>
+        <div data-aos="fade-left">
+            <div class="info-card">
+                <i class="fa-solid fa-building" style="font-size: 2rem; color: var(--accent); margin-bottom: 15px; display: inline-block;"></i>
+                <h3>Programme Highlights</h3>
+                <p><strong>Duration:</strong> Diploma 18 months | Degree 36 months (including internship semesters)<br>
+                <strong>Practical immersion:</strong> 500+ hours of hands-on training in front office, housekeeping, and F&B departments.<br>
+                <strong>Industry exposure:</strong> Mandatory 6-month internship in 4/5-star hotels.<br>
+                <strong>Technology focus:</strong> Opera PMS, hotel analytics, and revenue management software.</p>
+                <hr style="margin: 25px 0; border-color: rgba(0,0,0,0.05);">
+                <h3 style="font-size: 1.4rem;">Leadership Outcomes</h3>
+                <ul style="list-style: none; margin-top: 15px;">
+                    <li style="margin-bottom: 10px;">✓ Lead cross-functional hotel teams with strategic vision</li>
+                    <li style="margin-bottom: 10px;">✓ Optimize RevPAR and operational efficiency</li>
+                    <li style="margin-bottom: 10px;">✓ Navigate legal and regulatory frameworks</li>
+                    <li style="margin-bottom: 10px;">✓ Deliver exceptional guest experiences consistently</li>
+                    <li>✓ Develop and execute hotel marketing and sales plans</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Operational Philosophy & Practical Experience -->
+<section class="section-padding">
+    <div class="container two-col-layout" style="gap: 50px;">
+        <div data-aos="fade-up">
+            <img src="https://i.pinimg.com/1200x/1f/87/38/1f8738c89c8192a7acb208c75f23c19f.jpg" alt="Hotel Front Office Management" style="width: 100%; border-radius: 28px; box-shadow: 0 20px 35px rgba(0,0,0,0.05);">
+        </div>
+        <div data-aos="fade-up" data-aos-delay="150">
+            <span class="section-sub">Beyond the Classroom</span>
+            <h2 class="section-title">Real-World Hotel Leadership</h2>
+            <p style="margin-bottom: 20px;">This course acquaints the student with the scope and complexity of the hospitality industry by exploring the national and global relationships of lodging, food, and beverage operations. The course examines career opportunities, organizational structures, history and human resource management. Students will examine trends, integrated technology and its effects on customer and guest service requirements in the lodging and food service industry.</p>
+            <p>Our students gain direct practical experience in simulated and real hotel environments, from managing reception to handling crisis situations, ensuring they graduate as confident leaders.</p>
+            <div style="margin-top: 35px;">
+                <a href="Apply.html" class="btn-luxury dark">Begin Your Leadership Journey →</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Vision & Ethics Section (from original institute mission) -->
+
+
+
+<!-- Career Pathways -->
+<section class="section-padding">
+    <div class="container" style="text-align: center;">
+        <span class="section-sub">Global Careers</span>
+        <h2 class="section-title">Leadership Destinations</h2>
+        <div class="badge-list" style="justify-content: center; margin: 40px 0;">
+            <span class="badge">Hotel General Manager</span>
+            <span class="badge">Front Office Director</span>
+            <span class="badge">Revenue Manager</span>
+            <span class="badge">Regional Operations Director</span>
+            <span class="badge">Resort Manager</span>
+            <span class="badge">Luxury Brand Consultant</span>
+            <span class="badge">Hospitality Entrepreneur</span>
+            <span class="badge">Corporate Trainer</span>
+        </div>
+        <p style="max-width: 800px; margin: 0 auto;">Our alumni network spans international hotel chains, boutique properties, cruise lines, and executive positions in leading hospitality groups. With Orovie's reputation for exacting standards, graduates are sought after by top employers worldwide.</p>
+    </div>
+</section>
+
+<footer>
+    <p style="color: #5a5a5a; font-size: 0.85rem;">&copy; 2025 Orovie Hospitality Institute. Excellence Refined. — Hotel Administration Programme</p>
+</footer>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    AOS.init({ duration: 1000, once: true });
+    window.addEventListener('scroll', () => {
+        const nav = document.getElementById('navbar');
+        if (window.scrollY > 80) nav.classList.add('scrolled');
+        else nav.classList.remove('scrolled');
+    });
+    const mobileMenu = document.getElementById('mobile-menu');
+    const navLinks = document.getElementById('nav-links');
+    mobileMenu.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+        const icon = mobileMenu.querySelector('i');
+        icon.classList.toggle('fa-bars');
+        icon.classList.toggle('fa-times');
+    });
+    document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', () => {
+            navLinks.classList.remove('active');
+            const icon = mobileMenu.querySelector('i');
+            if(icon) { icon.classList.add('fa-bars'); icon.classList.remove('fa-times'); }
+        });
+    });
+</script>
+</body>
+</html>
