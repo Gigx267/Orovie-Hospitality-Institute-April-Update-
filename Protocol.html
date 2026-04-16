@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Protocol & Etiquette | Orovie Hospitality Institute</title>
+    <title>Professional Server & Etiquette | Orovie Hospitality Institute</title>
     <link rel="icon" type="image/x-icon" href="logo.png">
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -32,7 +32,7 @@
 
         h1, h2, h3, .logo { font-family: 'Cormorant Garamond', serif; font-weight: 300; }
 
-        /* --- NAVIGATION (identical to main site) --- */
+        /* --- NAVIGATION --- */
         nav {
             position: fixed;
             top: 0; width: 100%;
@@ -70,7 +70,6 @@
             z-index: 1001;
         }
 
-        /* dropdown */
         .nav-links li {
             position: relative;
             display: inline-block;
@@ -110,33 +109,35 @@
             margin-left: 5px;
         }
 
-        /* Hero */
-        .hero-protocol {
-            min-height: 65vh;
+        /* Hero Section - Server Excellence */
+        .hero-server {
+            min-height: 70vh;
             padding: 180px 5% 100px;
-            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.5)), url(' ') center/cover fixed;
+            background: linear-gradient(135deg, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.5) 100%), url('https://i.pinimg.com/1200x/c6/33/24/c633242999c502a7a4b2fb2f1b2278ca.jpg') center/cover fixed;
             display: flex;
             align-items: flex-end;
             color: white;
         }
-        .hero-protocol .container {
+        .hero-server .container {
             max-width: 1400px;
             margin: 0 auto;
             width: 100%;
         }
-        .hero-protocol h1 {
+        .hero-server h1 {
             font-size: clamp(3rem, 8vw, 5.5rem);
             line-height: 1.1;
             font-weight: 500;
+            letter-spacing: -0.02em;
         }
-        .hero-protocol p {
-            font-size: 1.1rem;
-            max-width: 650px;
+        .hero-server .hero-tagline {
+            font-size: 1.2rem;
+            max-width: 680px;
             margin-top: 20px;
-            opacity: 0.9;
+            opacity: 0.95;
+            border-left: 3px solid var(--accent);
+            padding-left: 25px;
         }
 
-        /* Section utilities */
         .section-padding {
             padding: 100px 5%;
         }
@@ -161,91 +162,93 @@
             display: block;
         }
 
-        /* Curriculum Grid */
-        .curriculum-grid {
+        /* Technical Mechanics Cards */
+        .mechanics-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
             gap: 30px;
             margin-top: 50px;
         }
-        .course-card {
+        .tech-card {
             background: var(--white);
-            padding: 28px;
-            border-radius: 12px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.03);
+            padding: 32px 28px;
+            border-radius: 20px;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.03);
             transition: var(--transition);
-            border: 1px solid rgba(184,146,106,0.15);
+            border: 1px solid rgba(184,146,106,0.12);
         }
-        .course-card:hover {
-            transform: translateY(-6px);
+        .tech-card:hover {
+            transform: translateY(-8px);
             border-color: var(--accent);
-            box-shadow: 0 25px 40px rgba(0,0,0,0.05);
+            box-shadow: 0 25px 45px rgba(0,0,0,0.08);
         }
-        .course-code {
-            font-size: 0.7rem;
-            font-weight: 700;
-            letter-spacing: 1.5px;
+        .tech-icon {
+            font-size: 2.2rem;
             color: var(--accent);
-            text-transform: uppercase;
-            margin-bottom: 12px;
+            margin-bottom: 20px;
         }
-        .course-title {
-            font-family: 'Cormorant Garamond', serif;
+        .tech-card h3 {
             font-size: 1.6rem;
             font-weight: 500;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
         }
-        .course-desc {
-            font-size: 0.85rem;
+        .tech-card p {
+            font-size: 0.9rem;
             color: var(--muted);
-            line-height: 1.5;
+            line-height: 1.6;
+        }
+        .skill-badge {
+            margin-top: 18px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .skill-badge span {
+            background: var(--light-beige);
+            padding: 5px 12px;
+            border-radius: 30px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: var(--accent-dark);
         }
 
-        /* two column for requirements */
+        /* Psychology of Guest Relations */
+        .psychology-section {
+            background: var(--light-beige);
+        }
         .two-col-layout {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 60px;
-            align-items: start;
+            align-items: center;
         }
-        .requirement-list {
-            list-style: none;
+        .guest-principle {
+            margin-bottom: 35px;
         }
-        .requirement-list li {
-            margin-bottom: 14px;
+        .guest-principle h4 {
+            font-size: 1.4rem;
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+            margin-bottom: 10px;
             display: flex;
             align-items: center;
-            gap: 14px;
-            font-size: 0.95rem;
-        }
-        .requirement-list i {
-            color: var(--accent);
-            width: 22px;
-            font-size: 1rem;
-        }
-        .info-card {
-            background: var(--light-beige);
-            padding: 40px;
-            border-radius: 24px;
-        }
-        .info-card h3 {
-            font-size: 1.8rem;
-            margin-bottom: 20px;
-        }
-        .badge-list {
-            display: flex;
-            flex-wrap: wrap;
             gap: 12px;
-            margin: 25px 0;
         }
-        .badge {
+        .guest-principle h4 i {
+            color: var(--accent);
+            font-size: 1.4rem;
+        }
+        .quote-block {
             background: white;
-            padding: 8px 20px;
-            border-radius: 40px;
-            font-size: 0.75rem;
-            font-weight: 600;
+            padding: 30px;
+            border-radius: 28px;
+            margin-top: 30px;
+            border-left: 5px solid var(--accent);
+        }
+        .quote-block p {
+            font-style: italic;
+            font-size: 1rem;
             color: var(--ink);
-            border: 1px solid var(--accent);
         }
 
         .btn-luxury {
@@ -268,6 +271,7 @@
         .btn-luxury.dark:hover {
             background: var(--accent);
         }
+
         footer {
             background: #f4f1ee;
             text-align: center;
@@ -291,11 +295,11 @@
             }
             .nav-links.active { right: 0; }
             .two-col-layout { grid-template-columns: 1fr; gap: 40px; }
-            .hero-protocol { background-attachment: scroll; }
+            .hero-server { background-attachment: scroll; }
         }
         @media (max-width: 600px) {
             .section-padding { padding: 60px 5%; }
-            .curriculum-grid { grid-template-columns: 1fr; }
+            .mechanics-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -328,129 +332,170 @@
     </div>
 </nav>
 
-<!-- Hero Section -->
-<section class="hero-protocol">
+<!-- Hero Section: Professional Server & Etiquette -->
+<section class="hero-server">
     <div class="container">
-        <h1 data-aos="fade-up">Protocol & <br>Etiquette</h1>
-        <p data-aos="fade-up" data-aos-delay="150">Master the art of diplomatic grace, international protocol, and executive presence. Designed for leaders who represent excellence in every gesture, word, and interaction.</p>
+        <h1 data-aos="fade-up">Professional Server<br> & Guest Psychology</h1>
+        <div class="hero-tagline" data-aos="fade-up" data-aos-delay="150">
+            Master the technical mechanics of impeccable service & the psychological intelligence of genuine hospitality.
+        </div>
+        <p data-aos="fade-up" data-aos-delay="250" style="margin-top: 30px; max-width: 550px; font-size: 0.95rem;">Beyond etiquette — the science of anticipation, precision in execution, and the art of emotional connection.</p>
     </div>
 </section>
 
-<!-- Curriculum based on the provided "Protocol and Etiquette" course outline -->
+<!-- Technical Mechanics: The "How" of Service Excellence -->
 <section class="section-padding">
     <div class="container">
-        <span class="section-sub" data-aos="fade-up">The Art of Distinguished Bearing</span>
-        <h2 class="section-title" data-aos="fade-up" data-aos-delay="50">Comprehensive Protocol Curriculum</h2>
-        <p data-aos="fade-up" data-aos-delay="100">This programme develops students in personal leadership, emotional intelligence, legendary service, titles and forms of address, international protocol, gifts, ceremonies, logistics, and military protocol. Graduates emerge as confident, culturally intelligent professionals equipped for diplomatic, corporate, and luxury service environments.</p>
+        <span class="section-sub" data-aos="fade-up">Technical Mechanics</span>
+        <h2 class="section-title" data-aos="fade-up" data-aos-delay="50">The Architecture of Flawless Service</h2>
+        <p data-aos="fade-up" data-aos-delay="100">Every gesture, placement, and sequence is intentional. Our curriculum dissects the physical mastery of service — from table topography to silent service choreography — ensuring absolute precision in every interaction.</p>
         
-        <div class="curriculum-grid" data-aos="fade-up" data-aos-delay="200">
-            <!-- Courses from Protocol and Etiquette document + expanded relevant topics -->
-            <div class="course-card"><div class="course-code">PEL101</div><div class="course-title">Personal Leadership & Emotional Intelligence</div><div class="course-desc">Self-awareness, resilience, empathy, and leading with authenticity in high-stakes settings.</div></div>
-            <div class="course-card"><div class="course-code">PEL102</div><div class="course-title">Legendary Service: Anticipating the Unspoken</div><div class="course-desc">Exceeding expectations, reading guest preferences, and delivering unforgettable experiences.</div></div>
-            <div class="course-card"><div class="course-code">PEL103</div><div class="course-title">Titles, Forms of Address & Social Hierarchies</div><div class="course-desc">Correct usage for royalty, diplomats, officials, and corporate executives globally.</div></div>
-            <div class="course-card"><div class="course-code">PEL104</div><div class="course-title">International Protocol & Gift-Giving Customs</div><div class="course-desc">Cross-cultural nuances, appropriate gifts, and avoiding diplomatic faux pas.</div></div>
-            <div class="course-card"><div class="course-code">PEL105</div><div class="course-title">Introduction to the Master Protocol Process</div><div class="course-desc">Systematic framework for planning and executing protocol-driven events.</div></div>
-            <div class="course-card"><div class="course-code">PEL106</div><div class="course-title">Flags, Logos, Anthems & National Symbols</div><div class="course-desc">Order of precedence, flag etiquette, anthem protocols, and ceremonial usage.</div></div>
-            <div class="course-card"><div class="course-code">PEL107</div><div class="course-title">Ceremonies, Logistics & Administrative Tools</div><div class="course-desc">Seating plans, processions, guest flow, invitations, and run-of-show management.</div></div>
-            <div class="course-card"><div class="course-code">PEL108</div><div class="course-title">Military Protocol & Personal Diplomacy</div><div class="course-desc">Honours, salutes, official visits, and building cross-cultural diplomatic relationships.</div></div>
-            <div class="course-card"><div class="course-code">PEL201</div><div class="course-title">Dining Etiquette: Global Traditions</div><div class="course-desc">American, Continental, Asian, and Middle Eastern dining customs, table settings, and hosting.</div></div>
-            <div class="course-card"><div class="course-code">PEL202</div><div class="course-title">Business Etiquette & Corporate Protocol</div><div class="course-desc">Meeting behaviour, virtual presence, networking, and cross-border business norms.</div></div>
-            <div class="course-card"><div class="course-code">PEL203</div><div class="course-title">Wardrobe & Grooming for Distinction</div><div class="course-desc">Dress codes (white tie, black tie, business formal, smart casual), cultural modesty, and personal presentation.</div></div>
-            <div class="course-card"><div class="course-code">PEL204</div><div class="course-title">Crisis Communication & Poise Under Pressure</div><div class="course-desc">Maintaining composure, managing difficult guests, and reputation protection.</div></div>
+        <div class="mechanics-grid" data-aos="fade-up" data-aos-delay="200">
+            <div class="tech-card">
+                <div class="tech-icon"><i class="fa-solid fa-utensils"></i></div>
+                <h3>Table Setting & Topography</h3>
+                <p>Geometric precision in cover placement, glassware alignment, and flatware chronology. Master the Russian, French, and American service styles with millimeter accuracy.</p>
+                <div class="skill-badge"><span>Cover Mechanics</span><span>Service Styles</span><span>Mise-en-place</span></div>
+            </div>
+            <div class="tech-card">
+                <div class="tech-icon"><i class="fa-solid fa-hand-sparkles"></i></div>
+                <h3>Silent Service & Crumbing</h3>
+                <p>The art of unobtrusive presence: silent replacement, crumbing techniques, and side-to-side service flow. Execute service without disrupting conversation.</p>
+                <div class="skill-badge"><span>Ninja Service</span><span>Crumbing Protocol</span><span>Spatial Awareness</span></div>
+            </div>
+            <div class="tech-card">
+                <div class="tech-icon"><i class="fa-solid fa-champagne-glasses"></i></div>
+                <h3>Beverage & Wine Rituals</h3>
+                <p>Opening, decanting, presenting, and pouring mechanics. Temperature protocols, glassware matching, and the theatre of tableside service.</p>
+                <div class="skill-badge"><span>Sommelier Basics</span><span>Pouring Angles</span><span>Decanting Flow</span></div>
+            </div>
+            <div class="tech-card">
+                <div class="tech-icon"><i class="fa-solid fa-people-arrows"></i></div>
+                <h3>Serving Trajectories & Body Mechanics</h3>
+                <p>Left vs. right service rules, carrying balance, tray-jacking techniques, and ergonomic posture to prevent fatigue during long service shifts.</p>
+                <div class="skill-badge"><span>Tray Balance</span><span>Service Vectors</span><span>Body Ergonomics</span></div>
+            </div>
+            <div class="tech-card">
+                <div class="tech-icon"><i class="fa-solid fa-clock"></i></div>
+                <h3>Temporal Sequencing & Course Pacing</h3>
+                <p>Kitchen-to-table timing, clearing rhythms, and coordinating multiple tables. Master the invisible clock that orchestrates fine dining.</p>
+                <div class="skill-badge"><span>Course Intervals</span><span>Synchronization</span><span>Gueidon Service</span></div>
+            </div>
+            <div class="tech-card">
+                <div class="tech-icon"><i class="fa-solid fa-shirt"></i></div>
+                <h3>Personal Grooming & Presentation</h3>
+                <p>Uniform standards, hygiene protocols, and non-verbal signalling. The professional server as a living symbol of the establishment's values.</p>
+                <div class="skill-badge"><span>Grooming Code</span><span>Non-verbal Cues</span><span>Stain Prevention</span></div>
+            </div>
         </div>
     </div>
 </section>
 
-<!-- Requirements & Professional Attributes -->
-<section class="section-padding" style="background: var(--light-beige);">
+<!-- Psychology of Guest Relations: The "Why" Behind Every Interaction -->
+<section class="psychology-section section-padding">
     <div class="container two-col-layout">
         <div data-aos="fade-right">
-            <span class="section-sub">Programme Prerequisites</span>
-            <h2 class="section-title" style="margin-bottom: 30px;">Eligibility & Requirements</h2>
-            <ul class="requirement-list">
-                <li><i class="fa-solid fa-diploma"></i> High school diploma or equivalent (for certificate)</li>
-                <li><i class="fa-solid fa-comment-dots"></i> Fluent English (additional languages an asset)</li>
-                <li><i class="fa-solid fa-hand-sparkles"></i> Professional demeanour and commitment to refinement</li>
-                <li><i class="fa-solid fa-suitcase"></i> Interview with programme director (in-person or virtual)</li>
-                <li><i class="fa-solid fa-shirt"></i> Business formal attire for all practical sessions</li>
-                <li><i class="fa-solid fa-passport"></i> Openness to cross-cultural learning and international protocols</li>
-            </ul>
-            <div class="badge-list">
-                <span class="badge">Certificate (3 months)</span>
-                <span class="badge">Advanced Diploma (8 months)</span>
-                <span class="badge">Executive Intensive (2 weeks)</span>
+            <span class="section-sub">Guest Psychology & Emotional Intelligence</span>
+            <h2 class="section-title">Reading the Unspoken</h2>
+            <p>Exceptional service transcends technique — it requires psychological attunement. Understanding guest motivations, emotional states, and subconscious expectations transforms a meal into a memorable experience.</p>
+            
+            <div class="guest-principle">
+                <h4><i class="fa-regular fa-face-smile"></i> Emotional Calibration</h4>
+                <p>Identify guest mood archetypes (celebratory, fatigued, business-focused, romantic) and adapt service intensity accordingly. Learn micro-expressions and vocal tone analysis.</p>
+            </div>
+            <div class="guest-principle">
+                <h4><i class="fa-regular fa-clock"></i> The Psychology of Waiting</h4>
+                <p>How perceived time differs from actual time. Techniques to manage anticipation, provide progress cues, and transform idle moments into hospitality touchpoints.</p>
+            </div>
+            <div class="guest-principle">
+                <h4><i class="fa-regular fa-comment-dots"></i> Needs Attribution & Anticipation</h4>
+                <p>Predicting guest needs before they are voiced. Differentiating between explicit requests and latent desires. The art of the "pre-emptive offer".</p>
+            </div>
+            <div class="guest-principle">
+                <h4><i class="fa-solid fa-brain"></i> De-escalation & Conflict Recovery</h4>
+                <p>Neurolinguistic techniques for turning dissatisfaction into loyalty. The service recovery paradox — how a well-handled complaint creates stronger guest bonds.</p>
             </div>
         </div>
+        
         <div data-aos="fade-left">
-            <div class="info-card">
-                <i class="fa-solid fa-crown" style="font-size: 2rem; color: var(--accent); margin-bottom: 15px; display: inline-block;"></i>
-                <h3>Programme Highlights</h3>
-                <p><strong>Duration:</strong> 3 months (Certificate) | 8 months (Advanced Diploma with practicum)<br>
-                <strong>Format:</strong> Highly interactive workshops, case studies, simulated diplomatic events, and real-world protocol exercises.<br>
-                <strong>Unique features:</strong> Live ceremonial simulations, flag and anthem drills, and guest lectures by former diplomats and chief of protocol officers.</p>
-                <hr style="margin: 25px 0; border-color: rgba(0,0,0,0.05);">
-                <h3 style="font-size: 1.4rem;">Key Competencies Gained</h3>
-                <ul style="list-style: none; margin-top: 15px;">
-                    <li style="margin-bottom: 10px;">✓ Confidently host VIPs, dignitaries, and C-suite executives</li>
-                    <li style="margin-bottom: 10px;">✓ Design and execute flawless protocol-driven events</li>
-                    <li style="margin-bottom: 10px;">✓ Navigate cultural sensitivities with grace</li>
-                    <li style="margin-bottom: 10px;">✓ Master international dining and social etiquette</li>
-                    <li>✓ Represent organisations at the highest diplomatic and corporate levels</li>
-                </ul>
+            <div class="quote-block">
+                <i class="fa-solid fa-quote-left" style="font-size: 2rem; color: var(--accent); opacity: 0.5; margin-bottom: 15px; display: block;"></i>
+                <p>“Guests don't remember the temperature of the soup — they remember how you made them feel. Technical precision provides the canvas; emotional intelligence paints the masterpiece.”</p>
+                <p style="margin-top: 15px; font-weight: 500;">— Orovie Service Philosophy</p>
+            </div>
+            
+            <div style="margin-top: 40px; background: white; border-radius: 28px; padding: 30px;">
+                <h3 style="font-size: 1.6rem; margin-bottom: 20px;">The Service Trinity</h3>
+                <div style="display: flex; flex-direction: column; gap: 20px;">
+                    <div><strong style="color: var(--accent);">01 · Technical Mechanics</strong><br><span style="font-size: 0.85rem;">Precision, sequence, posture, tool handling</span></div>
+                    <div><strong style="color: var(--accent);">02 · Psychological Intelligence</strong><br><span style="font-size: 0.85rem;">Empathy, reading cues, emotional regulation</span></div>
+                    <div><strong style="color: var(--accent);">03 · Social Etiquette</strong><br><span style="font-size: 0.85rem;">Cultural fluency, conversation codes, deference protocols</span></div>
+                </div>
+                <div class="skill-badge" style="margin-top: 25px;">
+                    <span>Emotional Agility</span>
+                    <span>Service Recovery</span>
+                    <span>Anticipatory Service</span>
+                </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Philosophy: The Orovie Standard -->
+<!-- Practical Training Modules: Real-World Application -->
 <section class="section-padding">
-    <div class="container two-col-layout" style="gap: 50px;">
-        <div data-aos="fade-up">
-            <img src="https://i.pinimg.com/736x/c8/22/2e/c8222ec77ccd4d0d97377ff152c27db9.jpg" alt="Diplomatic Etiquette Training" style="width: 100%; border-radius: 28px; box-shadow: 0 20px 35px rgba(0,0,0,0.05);">
-        </div>
-        <div data-aos="fade-up" data-aos-delay="150">
-            <span class="section-sub">The Orovie Distinction</span>
-            <h2 class="section-title">Where Refinement Meets Professionalism</h2>
-            <p style="margin-bottom: 20px;">We understand the diversity and backgrounds of the various cultures within our industry, but affirm the all-important need for professionalism. Our Protocol & Etiquette programme goes beyond rules — it cultivates a mindset of respect, cultural intelligence, and impeccable judgment.</p>
-            <p>Whether you aspire to serve in presidential palaces, international organisations, luxury hotels, or corporate boardrooms, Orovie’s protocol training gives you the confidence and competence to move with ease in any elite environment.</p>
-            <div style="margin-top: 35px;">
-                <a href="Apply.html" class="btn-luxury dark">Elevate Your Presence →</a>
-            </div>
+    <div class="container">
+        <span class="section-sub" data-aos="fade-up">Immersive Training Modules</span>
+        <h2 class="section-title" data-aos="fade-up" data-aos-delay="50">From Classroom to Dining Floor</h2>
+        <p data-aos="fade-up" data-aos-delay="100">Our approach combines theory with relentless practice. Simulated fine-dining environments, live service scenarios, and real guest interactions under expert supervision.</p>
+        
+        <div class="mechanics-grid" style="margin-top: 40px;" data-aos="fade-up">
+            <div class="tech-card"><div class="tech-icon"><i class="fa-solid fa-people-carry-box"></i></div><h3>Live Service Simulation</h3><p>Weekly pop-up restaurant experiences where students serve real guests under timed conditions with faculty critique.</p></div>
+            <div class="tech-card"><div class="tech-icon"><i class="fa-solid fa-chalkboard-user"></i></div><h3>Mystery Guest Assessments</h3><p>Unannounced evaluations by industry professionals testing both technical execution and psychological attunement.</p></div>
+            <div class="tech-card"><div class="tech-icon"><i class="fa-solid fa-face-tired"></i></div><h3>High-Stress Recovery Drills</h3><p>Simulated guest complaints, rush scenarios, and equipment failures to build composure under pressure.</p></div>
+            <div class="tech-card"><div class="tech-icon"><i class="fa-solid fa-language"></i></div><h3>Cultural Etiquette Modules</h3><p>Deep dives into dining customs, taboos, and expectations across 12 major cultures — from Japanese kaiseki to Middle Eastern hospitality.</p></div>
         </div>
     </div>
 </section>
 
-<!-- Institutional Values: Integrity & Cultural Understanding -->
-<section class="practical-note" style="background: var(--ink); color: white;">
-    <div class="container" data-aos="zoom-in">
-        <i class="fa-solid fa-handshake" style="font-size: 3rem; color: var(--accent); margin-bottom: 20px; display: inline-block;"></i>
-        <h2 style="font-family: 'Cormorant Garamond'; font-size: 2.5rem; margin-bottom: 20px;">Integrity & Cultural Understanding</h2>
-        <p style="max-width: 750px; margin: 0 auto; opacity: 0.85;">"Our vision is to create a better world through education, integrity and cultural understanding. We take pride in engaging in business with integrity and we make our decisions based on honesty and ethical behaviour."</p>
-        <p style="margin-top: 20px;">Every protocol graduate becomes an ambassador of these values, bridging cultures and elevating the standard of global hospitality.</p>
+<!-- The Orovie Standard: Personal Conduct Refinement -->
+<section style="background: var(--ink); color: white;">
+    <div class="container section-padding" style="text-align: center;">
+        <i class="fa-solid fa-medal" style="font-size: 3rem; color: var(--accent); margin-bottom: 20px;"></i>
+        <h2 class="section-title" style="color: white;">Refining Personal Conduct</h2>
+        <p style="max-width: 750px; margin: 0 auto 40px; opacity: 0.85;">Professionalism is not a uniform — it is a presence. Our code of conduct curriculum develops integrity, accountability, discretion, and the quiet confidence that defines elite service professionals.</p>
+        <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 25px;">
+            <div><i class="fa-solid fa-eye"></i> Discretion & Confidentiality</div>
+            <div><i class="fa-solid fa-hand-peace"></i> Grace Under Pressure</div>
+            <div><i class="fa-solid fa-clock"></i> Punctuality & Reliability</div>
+            <div><i class="fa-solid fa-heart"></i> Empathetic Neutrality</div>
+        </div>
+        <div style="margin-top: 45px;">
+            <a href="Apply.html" class="btn-luxury" style="background: transparent; border-color: white; color: white;">Apply to the Programme →</a>
+        </div>
     </div>
 </section>
 
-<!-- Career Destinations -->
+<!-- Career Outcomes -->
 <section class="section-padding">
     <div class="container" style="text-align: center;">
-        <span class="section-sub">Elite Career Pathways</span>
-        <h2 class="section-title">Where Protocol Experts Thrive</h2>
-        <div class="badge-list" style="justify-content: center; margin: 40px 0;">
-            <span class="badge">Chief of Protocol</span>
-            <span class="badge">Diplomatic Liaison</span>
-            <span class="badge">Corporate Etiquette Consultant</span>
-            <span class="badge">Luxury Concierge</span>
-            <span class="badge">Executive Assistant (C-Suite)</span>
-            <span class="badge">Event & Protocol Director</span>
-            <span class="badge">VIP Guest Relations Manager</span>
-            <span class="badge">Embassy Protocol Officer</span>
+        <span class="section-sub">Where Mastery Leads</span>
+        <h2 class="section-title">Career Destinations for Service Professionals</h2>
+        <div class="skill-badge" style="justify-content: center; margin: 40px 0; gap: 15px;">
+            <span class="badge">Fine Dining Captain</span>
+            <span class="badge">Private Butler</span>
+            <span class="badge">VIP Service Manager</span>
+            <span class="badge">Luxury Cruise Maître D'</span>
+            <span class="badge">Guest Relations Lead</span>
+            <span class="badge">Restaurant Consultant</span>
+            <span class="badge">Service Trainer</span>
+            <span class="badge">Yacht Steward/ess</span>
         </div>
-        <p style="max-width: 800px; margin: 0 auto;">Graduates of Orovie's Protocol & Etiquette programme are sought after by government institutions, international organisations, five-star hotels, royal households, and global corporations. The mastery of protocol is a timeless, high-value skill that opens doors to the world's most prestigious roles.</p>
+        <p style="max-width: 800px; margin: 0 auto;">Graduates of the Professional Server & Etiquette programme are recruited by Michelin-starred restaurants, private member clubs, luxury hotels, and ultra-high-net-worth households. The fusion of technical mastery and psychological insight creates the most sought-after service professionals in the industry.</p>
     </div>
 </section>
 
 <footer>
-    <p style="color: #5a5a5a; font-size: 0.85rem;">&copy; 2025 Orovie Hospitality Institute. Excellence Refined. — Protocol & Etiquette Programme</p>
+    <p style="color: #5a5a5a; font-size: 0.85rem;">&copy; 2025 Orovie Hospitality Institute — Professional Server & Etiquette: Technical Mechanics · Guest Psychology · Personal Conduct</p>
 </footer>
 
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
@@ -463,19 +508,21 @@
     });
     const mobileMenu = document.getElementById('mobile-menu');
     const navLinks = document.getElementById('nav-links');
-    mobileMenu.addEventListener('click', () => {
-        navLinks.classList.toggle('active');
-        const icon = mobileMenu.querySelector('i');
-        icon.classList.toggle('fa-bars');
-        icon.classList.toggle('fa-times');
-    });
-    document.querySelectorAll('.nav-links a').forEach(link => {
-        link.addEventListener('click', () => {
-            navLinks.classList.remove('active');
+    if (mobileMenu) {
+        mobileMenu.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
             const icon = mobileMenu.querySelector('i');
-            if(icon) { icon.classList.add('fa-bars'); icon.classList.remove('fa-times'); }
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-times');
         });
-    });
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                const icon = mobileMenu.querySelector('i');
+                if(icon) { icon.classList.add('fa-bars'); icon.classList.remove('fa-times'); }
+            });
+        });
+    }
 </script>
 </body>
 </html>
